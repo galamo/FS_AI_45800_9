@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BananaGalLoti — Worldwide banana sites</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <style>
+    :root {
+      --canopy: #0e2a18;
+      --leaf: #1f5c32;
+      --banana: #f4c430;
+      --ripe: #d4a017;
+      --flesh: #fff4c2;
+      --ink: #1a2418;
+      --muted: #3d5240;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Figtree, sans-serif;
+      background:
+        radial-gradient(ellipse 90% 60% at 12% -10%, rgba(244, 196, 48, 0.28), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 100% 8%, rgba(31, 92, 50, 0.22), transparent 50%),
+        linear-gradient(165deg, #e8f0dc 0%, #f7ecc8 42%, #dce8d0 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath fill='%231f5c32' d='M60 8c8 18 6 34-2 46 14-4 28 2 36 14-18 2-32 12-38 28-4-16-16-28-34-34 12-10 22-26 22-40 6 8 12 8 16-14z'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      z-index: 0;
+    }
+
+    .page { position: relative; z-index: 1; }
+
+    .hero {
+      display: grid;
+      grid-template-rows: auto minmax(55vh, 68vh);
+      min-height: 100vh;
+    }
+
+    .intro {
+      padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 64px) 20px;
+      max-width: 920px;
+    }
+
+    .brand {
+      margin: 0;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 9vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--canopy);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise-in 0.7s ease forwards;
+    }
+
+    .headline {
+      margin: 18px 0 0;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.25rem, 2.8vw, 1.85rem);
+      line-height: 1.2;
+      color: var(--leaf);
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise-in 0.7s ease 0.12s forwards;
+    }
+
+    .support {
+      margin: 12px 0 0;
+      max-width: 36rem;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: var(--muted);
+      opacity: 0;
+      transform: translateY(12px);
+      animation: rise-in 0.7s ease 0.22s forwards;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 4px;
+      background: linear-gradient(145deg, var(--banana), var(--ripe));
+      color: var(--canopy);
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: rise-in 0.7s ease 0.32s forwards;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .cta:hover,
+    .cta:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      outline: none;
+    }
+
+    #map-region {
+      width: 100%;
+      height: 100%;
+      min-height: 55vh;
+      background: #c8d9c0;
+    }
+
+    #business-map {
+      width: 100%;
+      height: 100%;
+      min-height: 55vh;
+    }
+
+    .sites {
+      padding: clamp(36px, 6vw, 72px) clamp(20px, 5vw, 64px) 48px;
+      max-width: 920px;
+    }
+
+    .sites h2 {
+      margin: 0 0 8px;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--canopy);
+    }
+
+    .sites-lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .site-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid rgba(14, 42, 24, 0.15);
+    }
+
+    .site-list li { border-bottom: 1px solid rgba(14, 42, 24, 0.15); }
+
+    .site-btn {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 4px;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 1.05rem;
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+
+    .site-btn:hover,
+    .site-btn:focus-visible {
+      color: var(--leaf);
+      padding-left: 10px;
+      outline: none;
+    }
+
+    .site-btn strong {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+    }
+
+    .site-btn span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .site-btn:hover span,
+    .site-btn:focus-visible span {
+      color: var(--leaf);
+    }
+
+    .footer {
+      padding: 0 clamp(20px, 5vw, 64px) 40px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .leaflet-container { font: inherit; background: #c8d9c0; }
+
+    .leaflet-popup-content-wrapper {
+      background: var(--flesh);
+      color: var(--ink);
+      border-radius: 6px;
+      box-shadow: 0 8px 24px rgba(14, 42, 24, 0.18);
+    }
+
+    .leaflet-popup-tip { background: var(--flesh); }
+
+    .leaflet-popup-content {
+      margin: 12px 14px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .leaflet-popup-content strong {
+      font-family: "Bricolage Grotesque", sans-serif;
+      color: var(--canopy);
+    }
+
+    .leaflet-popup-content .city {
+      color: var(--leaf);
+      font-weight: 600;
+    }
+
+    .leaflet-control-attribution {
+      background: rgba(255, 244, 194, 0.9) !important;
+      color: var(--muted) !important;
+    }
+
+    .leaflet-control-attribution a { color: var(--leaf) !important; }
+
+    .banana-marker {
+      width: 36px;
+      height: 48px;
+      display: block;
+      filter: drop-shadow(0 4px 6px rgba(14, 42, 24, 0.35));
+      transform: translateY(-24px);
+      opacity: 0;
+      animation: marker-drop 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
+    }
+
+    .banana-marker svg { display: block; width: 100%; height: 100%; }
+
+    @keyframes rise-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes marker-drop {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .hero { grid-template-rows: auto minmax(48vh, 58vh); }
+      #map-region,
+      #business-map { min-height: 48vh; }
+      .site-btn {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .site-btn span { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="intro">
+        <h1 class="brand">BananaGalLoti</h1>
+        <p class="headline">Fresh bananas from five cities worldwide</p>
+        <p class="support">Find our sales sites across Tel Aviv, New York, Dubai, Larnaka, and Tokyo.</p>
+        <a class="cta" href="#map-region">See our sites</a>
+      </div>
+      <div id="map-region">
+        <div id="business-map" role="img" aria-label="Map of BananaGalLoti business locations worldwide"></div>
+      </div>
+    </header>
+
+    <section class="sites" id="sites" aria-labelledby="sites-heading">
+      <h2 id="sites-heading">Our sites</h2>
+      <p class="sites-lead">Select a city to fly the map to that banana sales site.</p>
+      <ul class="site-list" id="site-list"></ul>
+    </section>
+
+    <footer class="footer">BananaGalLoti — fresh banana sales around the world.</footer>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module">
+    const sites = [
+      { name: "Tel Aviv", country: "Israel", lat: 32.0853, lng: 34.7818 },
+      { name: "New York", country: "United States", lat: 40.7128, lng: -74.006 },
+      { name: "Dubai", country: "United Arab Emirates", lat: 25.2048, lng: 55.2708 },
+      { name: "Larnaka", country: "Cyprus", lat: 34.9229, lng: 33.6234 },
+      { name: "Tokyo", country: "Japan", lat: 35.6762, lng: 139.6503 },
+      { name: "Fugen", country: "Austria", lat: 15.6762, lng: 29.6503 },
+    ];
+
+    const bananaSvg = `
+      <svg viewBox="0 0 36 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M18 4c8 2 14 10 13 22-1 9-7 16-14 18-1-6 1-12 5-16-6 1-11-2-13-8C7 12 11 5 18 4z" fill="#f4c430"/>
+        <path d="M18 4c3 1 6 3 8 7-4 1-8 0-11-3 1-2 2-3 3-4z" fill="#1f5c32"/>
+        <path d="M20 10c5 4 8 11 7 18-3-5-5-11-7-18z" fill="#d4a017" opacity=".45"/>
+      </svg>
+    `;
+
+    const map = L.map("business-map", {
+      scrollWheelZoom: false,
+      worldCopyJump: true,
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(map);
+
+    const list = document.querySelector("#site-list");
+    const bounds = [];
+    const fragment = document.createDocumentFragment();
+
+    for (const [index, site] of sites.entries()) {
+      const { name, country, lat, lng } = site;
+      const delay = 0.15 + index * 0.1;
+
+      const icon = L.divIcon({
+        className: "",
+        html: `<div class="banana-marker" style="animation-delay:${delay}s" aria-hidden="true">${bananaSvg}</div>`,
+        iconSize: [36, 48],
+        iconAnchor: [18, 46],
+        popupAnchor: [0, -42],
+      });
+
+      const marker = L.marker([lat, lng], { icon }).addTo(map);
+      marker.bindPopup(`
+        <strong>BananaGalLoti</strong><br>
+        <span class="city">${name}</span> · ${country}<br>
+        Fresh banana sales site
+      `);
+      bounds.push([lat, lng]);
+
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "site-btn";
+
+      const label = document.createElement("strong");
+      label.textContent = name;
+      const meta = document.createElement("span");
+      meta.textContent = country;
+      btn.append(label, meta);
+
+      btn.addEventListener("click", () => {
+        map.setView([lat, lng], 6, { animate: true });
+        marker.openPopup();
+      });
+
+      li.append(btn);
+      fragment.append(li);
+    }
+
+    list?.append(fragment);
+    map.fitBounds(bounds, { padding: [48, 48], maxZoom: 4 });
+  </script>
+</body>
+</html>

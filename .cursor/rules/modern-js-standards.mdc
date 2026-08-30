@@ -1,0 +1,52 @@
+---
+description: Enforce latest JavaScript language standards in plain JS files
+globs: "**/*.{js,mjs,cjs}"
+alwaysApply: true
+---
+
+# Modern JavaScript Standards
+
+When writing or editing JavaScript, use current ECMAScript style. Prefer modern syntax over legacy patterns.
+
+## Declarations & scope
+
+- Use `const` by default; `let` only when reassignment is required
+- Never use `var`
+- Prefer ES modules (`import` / `export`) over IIFEs or globals
+- Prefer `for...of` (with `.entries()` when an index is needed) over `forEach` with `function`
+
+## Syntax
+
+- Use arrow functions for callbacks and short handlers
+- Use template literals instead of string concatenation with `+`
+- Destructure objects and arrays when reading multiple fields
+- Prefer optional chaining (`?.`) and nullish coalescing (`??`) over manual null checks
+
+## DOM (when applicable)
+
+- Prefer `document.querySelector` / `querySelectorAll` over `getElementById` / `getElementsBy*`
+- Prefer `element.append()` / `prepend()` over `appendChild` when adding nodes
+- Prefer `textContent` + `createElement` over `innerHTML` for dynamic text
+- Use `DocumentFragment` when appending many siblings in one pass
+
+## Examples
+
+```javascript
+// ❌ BAD
+var name = site.name;
+list.appendChild(li);
+btn.innerHTML = "<strong>" + site.name + "</strong>";
+sites.forEach(function (site, i) {
+  /* ... */
+});
+
+// ✅ GOOD
+const { name, country } = site;
+list?.append(fragment);
+label.textContent = name;
+for (const [i, site] of sites.entries()) {
+  /* ... */
+}
+```
+
+Do not introduce Babel-only or experimental proposals unless the project already depends on them.
