@@ -20,6 +20,7 @@
 # Cursor
 
 1. Rules - instructions to the project, for example: Use always JS latest standartization
+2. Skills - Repeatable instructions to fill the user requesterd tasks, how to perform the steps, exact workflow
 
 ## JS Date Object:
 
