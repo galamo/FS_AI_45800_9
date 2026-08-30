@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Ledger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <p class="brand">Expense Ledger</p>
+        <p class="tagline">Track spending by category — add and remove entries.</p>
+      </header>
+
+      <section class="report" aria-labelledby="report-heading">
+        <div class="section-head">
+          <h2 id="report-heading">Category report</h2>
+          <p class="section-sub">Totals aggregated from your current expenses.</p>
+        </div>
+        <p class="grand-total">
+          All expenses
+          <span id="grand-total">$0.00</span>
+        </p>
+        <ul id="category-report" class="category-report"></ul>
+      </section>
+
+      <section class="form-section" aria-labelledby="form-heading">
+        <div class="section-head">
+          <h2 id="form-heading">Add expense</h2>
+          <p class="section-sub">Date is set automatically to today.</p>
+        </div>
+        <form id="expense-form" class="expense-form" novalidate>
+          <div class="field">
+            <label for="expense-name">Name</label>
+            <input
+              id="expense-name"
+              name="name"
+              type="text"
+              autocomplete="off"
+              required
+              maxlength="80"
+              placeholder="Coffee, rent, flight…"
+            />
+          </div>
+          <div class="field">
+            <label for="expense-price">Price</label>
+            <input
+              id="expense-price"
+              name="price"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+              placeholder="0.00"
+            />
+          </div>
+          <div class="field">
+            <label for="expense-category">Category</label>
+            <select id="expense-category" name="category" required>
+              <option value="">Select category</option>
+              <option value="food">Food</option>
+              <option value="vacations">Vacations</option>
+              <option value="bills">Bills</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <p id="form-error" class="form-error" hidden></p>
+          <button type="submit" class="btn btn-primary">Add expense</button>
+        </form>
+      </section>
+
+      <section class="table-section" aria-labelledby="table-heading">
+        <div class="section-head">
+          <h2 id="table-heading">Expenses</h2>
+          <p class="section-sub">Create and delete only — no editing.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="expenses-table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+                <th scope="col"><span class="visually-hidden">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="expenses-body"></tbody>
+          </table>
+          <p id="empty-state" class="empty-state" hidden>No expenses yet. Add one above.</p>
+        </div>
+      </section>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

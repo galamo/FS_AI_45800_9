@@ -1,0 +1,75 @@
+---
+description: Keep client HTML, CSS, and JavaScript in separate files; no inline styles or scripts
+alwaysApply: true
+---
+
+# Split Client HTML, CSS, and JS
+
+When writing or editing client-side web pages, keep markup, styles, and scripts in separate files. Never mix them in one file.
+
+## Rules
+
+- Put markup only in `.html` files
+- Put styles only in `.css` files
+- Put all JavaScript in `.js` files (or modules loaded from them)
+- Never use inline `<style>...</style>` blocks
+- Never use inline `style="..."` attributes (except when the user explicitly requires a one-off demo)
+- Never use inline `<script>...</script>` blocks with code
+- Never use inline event handlers (`onclick`, `onchange`, etc.)
+- Link CSS with `<link rel="stylesheet" href="...">`
+- Load scripts with an external `<script src="...">` tag (prefer `type="module"` when using ES modules)
+- Prefer `defer` on classic scripts so the DOM is ready before they run
+
+## Examples
+
+```html
+<!-- ❌ BAD: everything in one HTML file -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      button { color: red; }
+    </style>
+  </head>
+  <body>
+    <button style="font-size: 16px" onclick="greet()">Hi</button>
+    <script>
+      function greet() {
+        alert("hello");
+      }
+    </script>
+  </body>
+</html>
+```
+
+```html
+<!-- ✅ GOOD: index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <button id="greet-btn">Hi</button>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
+```
+
+```css
+/* ✅ GOOD: styles.css */
+button {
+  color: red;
+  font-size: 16px;
+}
+```
+
+```javascript
+// ✅ GOOD: index.js
+const greetBtn = document.querySelector("#greet-btn");
+greetBtn?.addEventListener("click", () => {
+  alert("hello");
+});
+```
+
+When creating a new client page, create `.html`, `.css`, and `.js` files together unless the user explicitly asks for a single-file snippet.
