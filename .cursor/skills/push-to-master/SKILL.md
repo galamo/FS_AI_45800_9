@@ -34,13 +34,13 @@ Replace `2026` and `galamo` with the actual year and author.
 3. **Push to master**
 
 ```bash
-git push -u origin HEAD:master
+git push -u origin HEAD:main
 ```
 
-If the local branch is already `master`:
+If the local branch is already `main`:
 
 ```bash
-git push -u origin master
+git push -u origin main
 ```
 
 4. **Success reply**
