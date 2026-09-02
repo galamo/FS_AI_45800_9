@@ -114,3 +114,7 @@ Starter file: [`exercise_primitives.js`](./exercise_primitives.js)
 - [ ] Runtime output is unchanged (same `console.log` values)
 
 Do **not** introduce `interface` / `type` aliases yet. This exercise is primitives only.
+
+# Exercise 2
+
+1. Create TS function that recieve 2 numbers a and b and return a+b, note a and b can have string or number type.
