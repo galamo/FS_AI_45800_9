@@ -17,7 +17,7 @@ const failure_1 = 1111;
 function init() {
     const title = document.getElementById("title");
     if (title) {
-        title.innerHTML = "we are TS developers!!! except Aviv";
+        title.innerHTML = "We Are AI TS Developers ! 2026";
     }
 }
 setTimeout(init, 2000);

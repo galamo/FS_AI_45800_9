@@ -18,7 +18,7 @@ const failure_1:number  = 1111
 function init(){
     const title = document.getElementById("title")
     if(title){
-        title.innerHTML = "we are TS developers!!! except Aviv"
+        title.innerHTML = "We Are AI TS Developers ! 2026"
     }
 }
 
