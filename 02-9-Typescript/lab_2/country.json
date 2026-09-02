@@ -1,0 +1,26 @@
+{
+    "name": "United States",
+    "official_name": "United States of America",
+    "cca2": "US",
+    "cca3": "USA",
+    "ccn3": "840",
+    "capital": "Washington, D.C.",
+    "region": "Americas",
+    "subregion": "Northern America",
+    "population": 331893745,
+    "latlng": [38.0, -97.0],
+    "demonym": "American",
+    "area_km2": 9833517,
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar",
+        "symbol": "$"
+      }
+    ],
+    "languages": {
+      "eng": "English"
+    },
+    "calling_code": "+1",
+    "flag_emoji": "🇺🇸"
+  }
