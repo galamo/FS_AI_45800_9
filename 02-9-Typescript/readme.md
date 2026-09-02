@@ -37,7 +37,9 @@ You should see version numbers (e.g. `v22.x` and `10.x`).
 6. Run inside Lab_2 `npm i typescript -g`
 7. Run inside Lab_2 `tsc --init` ( Create tsconfig.json for setting up TS compiler options)
 8. Create folder `src` inside Lab_2
-
+9. Complete # Exercise 1
+10. Edit `tsconfig.json` - src & dist should be configured
+11. Create a script `tsc --watch` - "compile": "tsc --watch" inside `packages.json`
 
 # Exercise 1 — JS to TypeScript (primitive types)
 

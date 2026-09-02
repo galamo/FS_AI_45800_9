@@ -1,31 +1,31 @@
 
-function formatProductId(id) {
+function formatProductId(id:number):string {
   return `sku_${id}`;
 }
 
-function isAdult(age) {
+function isAdult(age:number):boolean {
   return age >= 18;
 }
 
-function calcSubtotal(unitPrice, quantity) {
+function calcSubtotal(unitPrice:number, quantity:number):number {
   return unitPrice * quantity;
 }
 
-function applyMemberDiscount(subtotal, isMember) {
+function applyMemberDiscount(subtotal:number, isMember:boolean):number {
   if (isMember) {
     return subtotal * 0.9;
   }
   return subtotal;
 }
 
-function buildReceiptLine(productName, quantity, paid) {
+function buildReceiptLine(productName:string, quantity:number, paid:boolean):string {
   if (paid) {
     return `${productName} x${quantity} — paid`;
   }
   return `${productName} x${quantity} — pending`;
 }
 
-function getWelcomeMessage(customerName, isMember) {
+function getWelcomeMessage(customerName:string, isMember:boolean):string {
   if (isMember) {
     return `Welcome back, ${customerName}`;
   }
@@ -44,4 +44,15 @@ console.log(adult);
 console.log(subtotal);
 console.log(total);
 console.log(line);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
+console.log(hello);
 console.log(hello);
