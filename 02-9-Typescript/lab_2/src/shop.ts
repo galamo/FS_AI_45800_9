@@ -18,6 +18,8 @@ function applyMemberDiscount(subtotal:number, isMember:boolean):number {
   return subtotal;
 }
 
+buildReceiptLine("Notebook",10, true)
+
 function buildReceiptLine(productName:string, quantity:number, paid:boolean):string {
   if (paid) {
     return `${productName} x${quantity} — paid`;

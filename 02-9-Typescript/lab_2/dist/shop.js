@@ -14,6 +14,7 @@ function applyMemberDiscount(subtotal, isMember) {
     }
     return subtotal;
 }
+buildReceiptLine("Notebook", 10, true);
 function buildReceiptLine(productName, quantity, paid) {
     if (paid) {
         return `${productName} x${quantity} — paid`;
