@@ -376,3 +376,144 @@ if (doubled.ok) {
 - [ ] `getFromRecord(stock, "pen")` — on success, `value` is `number`
 - [ ] Inside `if (doubled.ok)`, `.value` is `number`; inside `else`, `.error` is `string`
 - [ ] No `extends`, no `any`
+
+# Exercise 8 — `keyof` on a nested object (`getField` / `setField`)
+
+`keyof T` is a union of the property names of `T`. Combined with a generic `K extends keyof T`, a function can accept **only real keys** and return the matching value type `T[K]`.
+
+Look at `lab_2/src/keyof.ts` for examples, then implement the functions below yourself.
+
+## Goal
+
+1. Keep the `Product` type (do not simplify it).
+2. Write a type `ProductKey` using `keyof Product`.
+3. Write `getField(product, key)`  
+   - `key` must be a key of `Product`  
+   - Return type must be `Product[K]` (or generic `T[K]`)
+4. Write `setField(product, key, value)`  
+   - `value` must match the type of that key  
+   - Return a **new** product (do not mutate the argument)
+5. Create an array `productKeys: ProductKey[]` that lists every key. An invalid string such as `"weight"` must be a type error.
+
+Starter Code
+```ts
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  category: "stationery" | "electronics" | "books";
+  inStock: boolean;
+  tags: string[];
+  details: {
+    sku: string;
+    weightGrams: number;
+    origin: string;
+  };
+};
+
+const notebook: Product = {
+  id: 1,
+  name: "Notebook",
+  price: 19.9,
+  category: "stationery",
+  inStock: true,
+  tags: ["paper", "office"],
+  details: { sku: "NB-01", weightGrams: 180, origin: "JP" },
+};
+
+type ProductKey = /* keyof … */;
+
+function getField(/* product, key */) {
+  // implement
+}
+
+function setField(/* product, key, value */) {
+  // implement
+}
+
+const productKeys: ProductKey[] = [
+  // list every Product key
+];
+
+const name = getField(notebook, "name");
+const price = getField(notebook, "price");
+const cheaper = setField(notebook, "price", 14.9);
+```
+
+## Checklist
+
+- [ ] `ProductKey` is a union of all `Product` keys (hover to check)
+- [ ] `getField(notebook, "name")` is `string`; `getField(notebook, "price")` is `number`
+- [ ] `getField(notebook, "weight")` is a **type error**
+- [ ] `setField(notebook, "inStock", true)` works; `setField(notebook, "inStock", "yes")` is a **type error**
+- [ ] `productKeys` only contains real `Product` keys
+
+# Exercise 9 — Nested `keyof` and `Record<keyof T, …>`
+
+`keyof` also works on a **nested** property: `keyof Product["details"]` is the keys of the inner object, not of `Product`.
+
+`Record<keyof T, U>` builds a new object type that has **the same keys** as `T`, but every value is `U` (labels, flags, errors, …).
+
+## Goal
+
+1. Reuse `Product` from Exercise 8 (or copy it).
+2. Write `DetailsKey` as `keyof Product["details"]`.
+3. Write `getDetail(product, key)` that reads one field from `product.details` and returns `Product["details"][K]`.
+4. Write `ProductLabels` as `Record<keyof Product, string>` and fill in a label for **every** product key.
+5. Write `DetailsFilled` as `Record<keyof Product["details"], boolean>` — a flag per details field.
+
+Starter Code
+```ts
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  category: "stationery" | "electronics" | "books";
+  inStock: boolean;
+  tags: string[];
+  details: {
+    sku: string;
+    weightGrams: number;
+    origin: string;
+  };
+};
+
+const notebook: Product = {
+  id: 1,
+  name: "Notebook",
+  price: 19.9,
+  category: "stationery",
+  inStock: true,
+  tags: ["paper", "office"],
+  details: { sku: "NB-01", weightGrams: 180, origin: "JP" },
+};
+
+type DetailsKey = /* keyof nested details */;
+
+function getDetail(/* product, key */) {
+  // implement
+}
+
+type ProductLabels = /* Record<keyof Product, string> */;
+
+const productLabels: ProductLabels = {
+  // one string label per Product key
+};
+
+type DetailsFilled = /* Record<keyof Product["details"], boolean> */;
+
+const detailsFilled: DetailsFilled = {
+  // one boolean per details key
+};
+
+const sku = getDetail(notebook, "sku");
+const origin = getDetail(notebook, "origin");
+```
+
+## Checklist
+
+- [ ] `DetailsKey` is `"sku" | "weightGrams" | "origin"` — **not** the keys of `Product`
+- [ ] `getDetail(notebook, "sku")` is `string`; `getDetail(notebook, "weightGrams")` is `number`
+- [ ] `getDetail(notebook, "price")` is a **type error** (`price` is not a details key)
+- [ ] `productLabels` has a string for every `Product` key (missing a key is a type error)
+- [ ] `detailsFilled` has a boolean for `sku`, `weightGrams`, and `origin` only
