@@ -121,7 +121,7 @@ Do **not** introduce `interface` / `type` aliases yet. This exercise is primitiv
 
 # Excercise 3
 
-TypeScript Interfaces Exercises
+
 User Interface
 
 Create an interface called User with the following properties:
