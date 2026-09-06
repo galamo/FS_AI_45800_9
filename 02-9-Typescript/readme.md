@@ -118,3 +118,61 @@ Do **not** introduce `interface` / `type` aliases yet. This exercise is primitiv
 # Exercise 2
 
 1. Create TS function that recieve 2 numbers a and b and return a+b, note a and b can have string or number type.
+
+# Excercise 3
+
+TypeScript Interfaces Exercises
+User Interface
+
+Create an interface called User with the following properties:
+
+id — number
+name — string
+email — string
+isActive — boolean
+age — optional number
+
+Then create a user object that matches the interface.
+
+Starter Code
+interface User {
+// Complete the interface
+}
+
+const user: User = {
+// Complete the object
+};
+
+# Excercise 4
+
+Product Interface
+
+Create an interface called Product.
+
+The product should contain:
+
+id — number
+name — string
+price — number
+category — string
+inStock — boolean
+description — optional string
+
+Create an array called products containing at least 3 products.
+
+Then use filter() to return only the products that are currently in stock.
+
+Starter Code
+interface Product {
+// Complete the interface
+}
+
+const products: Product[] = [
+// Add 3 products
+];
+
+const availableProducts = products.filter(
+// Complete the filter
+);
+
+console.log(availableProducts);

@@ -15,3 +15,28 @@ const result = add(5, 3);
 const result2 = add("4","1")
 
 
+function convertUSDToILS(value: number):number;
+function convertUSDToILS(value: string):number;
+function convertUSDToILS(value: number | string):number | string{
+  if(typeof value === "number"){
+    return value * 3
+  }else{
+    return "Invalid Input"
+  }
+}
+
+
+function getUserId(id:number):number;
+function getUserId(id:string):string
+function getUserId(id:number | string):number | string{
+  if(typeof id === "number"){
+    return "gal amouyal"
+  }else{
+    return "gal amouyal"
+  }
+}
+
+const result7 = getUserId(1);
+const result8 = getUserId("vadim");
+
+
