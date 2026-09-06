@@ -32,6 +32,16 @@ const products: Product[] = [
   },
 ];
 
+
+function getSingleItemFromArray<T>(array:Array<T>):T{
+    return array[0] as T
+}
+
+
+const resultarr122 = getSingleItemFromArray(products);
+
 const availableProducts = products.filter((product) => product.inStock);
 
 console.log(availableProducts);
+
+

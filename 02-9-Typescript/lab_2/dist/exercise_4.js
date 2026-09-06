@@ -23,5 +23,9 @@ const products = [
         description: "15-inch laptop",
     },
 ];
+function getSingleItemFromArray(array) {
+    return array[0];
+}
+const resultarr122 = getSingleItemFromArray(products);
 const availableProducts = products.filter((product) => product.inStock);
 console.log(availableProducts);
