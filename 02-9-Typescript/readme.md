@@ -176,3 +176,203 @@ const availableProducts = products.filter(
 );
 
 console.log(availableProducts);
+
+# Exercise 5 — Two type parameters (`zip` / `unzip` / `swap`)
+
+One generic is not always enough. Use **two** type parameters when the inputs (or the two halves of a pair) have different types.
+
+Do **not** use `extends` (no constraints). Infer `T` and `U` from the arguments.
+
+## Goal
+
+1. Write `zip(left, right)`  
+   - Takes `T[]` and `U[]`  
+   - Returns an array of pairs `[T, U]`  
+   - Stop at the shorter array (ignore leftover items)
+2. Write `unzip(pairs)`  
+   - Takes `[T, U][]`  
+   - Returns `[T[], U[]]` (two arrays)
+3. Write `swap(pair)`  
+   - Takes `[T, U]`  
+   - Returns `[U, T]`
+
+Starter Code
+```ts
+function zip(/* T[], U[] */): /* [T, U][] */ {
+  // implement
+}
+
+function unzip(/* [T, U][] */): /* [T[], U[]] */ {
+  // implement
+}
+
+function swap(/* [T, U] */): /* [U, T] */ {
+  // implement
+}
+
+const pairs = zip(["Ada", "Grace"], [36, 85]);
+const back = unzip(pairs);
+const flipped = swap(["pen", 10]);
+
+const names: string[] = back[0];
+const ages: number[] = back[1];
+const label: number = flipped[0];
+const count: string = flipped[1];
+```
+
+## Checklist
+
+- [ ] `zip(["Ada", "Grace"], [36, 85])` is `[string, number][]` (hover to check)
+- [ ] `unzip(pairs)` is `[string[], number[]]`
+- [ ] After `swap(["pen", 10])`, index `0` is `number` and index `1` is `string`
+- [ ] `zip([1, 2, 3], ["a"])` returns **one** pair (the extra numbers are dropped)
+- [ ] No `extends`, no `any`
+
+# Exercise 6 — Transforming types (`mapItems` / `merge` / `compose`)
+
+Generics are useful when the **output type is different** from the input type — or when two objects are combined into one type.
+
+Do **not** use `extends`.
+
+## Goal
+
+1. Write `mapItems(items, fn)`  
+   - Input: `T[]` and a function `(item: T) => U`  
+   - Output: `U[]`  
+   Example: mapping users to their names yields `string[]`, not `User[]`.
+2. Write `merge(a, b)`  
+   - Input: object `T` and object `U`  
+   - Output: `T & U` (one object with both sets of fields)  
+   - Later properties on `b` overwrite the same keys on `a` at runtime
+3. Write `compose(f, g)`  
+   - `f` is `(input: A) => B`  
+   - `g` is `(input: B) => C`  
+   - Return a new function `(input: A) => C` that runs `f` then `g`
+
+Starter Code
+```ts
+type User = { id: number; name: string };
+
+const users: User[] = [
+  { id: 1, name: "Ada" },
+  { id: 2, name: "Grace" },
+];
+
+function mapItems(/* items: T[], fn: (item: T) => U */): /* U[] */ {
+  // implement
+}
+
+function merge(/* a: T, b: U */): /* T & U */ {
+  // implement
+}
+
+function compose(/* f: (input: A) => B, g: (input: B) => C */): /* (input: A) => C */ {
+  // implement
+}
+
+const names = mapItems(users, (user) => user.name);
+const ids = mapItems(users, (user) => user.id);
+
+const profile = merge({ id: 1, name: "Ada" }, { city: "London", active: true });
+const city: string = profile.city;
+const active: boolean = profile.active;
+const id: number = profile.id;
+
+const toLength = compose(
+  (user: User) => user.name,
+  (name: string) => name.length,
+);
+const length: number = toLength(users[0]);
+```
+
+## Checklist
+
+- [ ] `names` is `string[]`, `ids` is `number[]` (not `User[]`)
+- [ ] `profile` has `id`, `name`, `city`, and `active` — all correctly typed
+- [ ] `toLength` accepts a `User` and returns a `number`
+- [ ] `mapItems` / `merge` / `compose` use more than one type parameter where needed
+- [ ] No `extends`, no `any`
+
+# Exercise 7 — Two type parameters + a typed `Result`
+
+A function can succeed with a value of type `T` or fail with an error of type `E`. Model both in **one** type.
+
+Do **not** use `extends`.
+
+## Goal
+
+1. Define this discriminated union (you may copy it):
+
+   ```ts
+   type Result<T, E> =
+     | { ok: true; value: T }
+     | { ok: false; error: E };
+   ```
+
+2. Write `ok(value)` and `err(error)` helpers that build `Result<T, E>` and **infer** `T` / `E` from the argument.
+3. Write `mapResult(result, fn)`  
+   - If `result` is ok, return `ok(fn(result.value))` — `fn` is `(value: T) => U`  
+   - If `result` is not ok, return the same error, typed as `Result<U, E>`  
+   The error type `E` must stay unchanged.
+4. Write `parsePositiveInt(raw: string): Result<number, string>`  
+   - Success: the string is an integer `> 0`  
+   - Failure: a string error message
+5. Write `getFromRecord(record, key)`  
+   - `record` is `Record<string, V>` (an object used as a dictionary)  
+   - `key` is `string`  
+   - Return `Result<V, string>`  
+   - Success when the key exists, failure (string message) when it does not
+
+Starter Code
+```ts
+type Result<T, E> =
+  | { ok: true; value: T }
+  | { ok: false; error: E };
+
+function ok(/* value: T */): /* Result */ {
+  // implement
+}
+
+function err(/* error: E */): /* Result */ {
+  // implement
+}
+
+function mapResult(/* result: Result<T, E>, fn: (value: T) => U */): /* Result<U, E> */ {
+  // implement
+}
+
+function parsePositiveInt(raw: string): Result<number, string> {
+  // implement
+}
+
+function getFromRecord(/* record: Record<string, V>, key: string */): /* Result<V, string> */ {
+  // implement
+}
+
+const parsed = parsePositiveInt("42");
+const doubled = mapResult(parsed, (n) => n * 2);
+
+const stock: Record<string, number> = {
+  pen: 10,
+  notebook: 3,
+};
+const pens = getFromRecord(stock, "pen");
+const missing = getFromRecord(stock, "stapler");
+
+if (doubled.ok) {
+  const amount: number = doubled.value;
+  console.log(amount);
+} else {
+  const message: string = doubled.error;
+  console.log(message);
+}
+```
+
+## Checklist
+
+- [ ] `ok` / `err` / `mapResult` / `getFromRecord` are generic (two parameters where needed)
+- [ ] `mapResult` turns `Result<number, string>` + `(n) => n * 2` into `Result<number, string>`
+- [ ] `mapResult` on a failure does not call `fn` and keeps the error type
+- [ ] `getFromRecord(stock, "pen")` — on success, `value` is `number`
+- [ ] Inside `if (doubled.ok)`, `.value` is `number`; inside `else`, `.error` is `string`
+- [ ] No `extends`, no `any`
