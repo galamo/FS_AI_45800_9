@@ -1,5 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import ErrorMessage from "../ErrorMessage"
+import Spinner from "../Spinner"
+import UserCard from "../UserCard"
 import "./users-page.css"
 import type { SingleUserType } from "./user-type"
 import { getUsersApi } from "./users-api"
@@ -38,51 +41,29 @@ export default function UsersPage() {
         <p className="users-page__subtitle">People loaded from Random User</p>
       </header>
 
-      {error && (
-        <div className="users-page__toast-wrap">
-          <div className="users-page__toast" role="alert">
-            <span className="users-page__toast-icon" aria-hidden="true">
-              !
-            </span>
-            <div className="users-page__toast-body">
-              <p className="users-page__toast-title">Could not load users</p>
-              <p className="users-page__toast-message">{error}</p>
-            </div>
-            <button
-              type="button"
-              className="users-page__toast-close"
-              onClick={() => setError("")}
-              aria-label="Dismiss error"
-            >
-              ×
-            </button>
-          </div>
-        </div>
-      )}
+      <ErrorMessage
+        title="Could not load users"
+        message={error}
+        onDismiss={() => setError("")}
+      />
 
-      {isLoading && (
-        <div className="users-page__loading" role="status" aria-live="polite">
-          <span className="users-page__spinner" aria-hidden="true" />
-          <p>Loading users…</p>
-        </div>
-      )}
+      {isLoading && <Spinner message="Loading users…" />}
 
       {!isLoading && (
-        <ul className="users-page__list">
-          {usersData.map((singleUser, index) => (
-            <li key={`${singleUser.name.first}-${singleUser.name.last}-${index}`}>
-              <span className="users-page__gender">[{singleUser.gender}]</span>
-              {singleUser.name.first} {singleUser.name.last}
-              <button onClick={()=>{
-                const restOfUsersWithoutThisOne = usersData.filter((user)=> user?.name?.last !== singleUser?.name?.last &&
-                 user?.name?.first !== singleUser?.name?.first)
+        <div className="users-page__grid">
+          {usersData.map((singleUser) => (
+            <UserCard
+              key={singleUser.login.uuid}
+              user={singleUser}
+              onRemove={() => {
+                const restOfUsersWithoutThisOne = usersData.filter(
+                  (user) => user.login.uuid !== singleUser.login.uuid,
+                )
                 setUsersData(restOfUsersWithoutThisOne)
-              }}>
-                Remove User
-              </button>
-            </li>
+              }}
+            />
           ))}
-        </ul>
+        </div>
       )}
 
       <div className="users-page__actions">

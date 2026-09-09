@@ -1,0 +1,105 @@
+.error-message__wrap {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.error-message {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: min(480px, calc(100% - 32px));
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  box-shadow: var(--shadow);
+  animation: error-message-in 0.28s ease-out;
+}
+
+.error-message__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: #dc2626;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+}
+
+.error-message__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.error-message__title {
+  font-weight: 600;
+  color: #7f1d1d;
+  margin-bottom: 4px;
+}
+
+.error-message__text {
+  font-size: 14px;
+  line-height: 140%;
+  color: #991b1b;
+}
+
+.error-message__close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #991b1b;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.error-message__close:hover,
+.error-message__close:focus-visible {
+  background: #fee2e2;
+}
+
+@keyframes error-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .error-message {
+    background: #3f1d1d;
+    border-color: #7f1d1d;
+    color: #fecaca;
+  }
+
+  .error-message__title,
+  .error-message__text,
+  .error-message__close {
+    color: #fecaca;
+  }
+
+  .error-message__close:hover,
+  .error-message__close:focus-visible {
+    background: #7f1d1d;
+  }
+}
