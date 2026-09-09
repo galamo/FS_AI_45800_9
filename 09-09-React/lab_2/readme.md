@@ -61,9 +61,7 @@ function Product(props: ProductProps) {
   const { name, category, price, image } = props;
 
   return (
-    <article className="product">
-      {/* image, name, category, price */}
-    </article>
+    <article className="product">{/* image, name, category, price */}</article>
   );
 }
 
@@ -87,12 +85,7 @@ import Product from "./components/product";
 
 function App() {
   return (
-    <Product
-      name="POÄNG"
-      category="Armchairs"
-      price={129}
-      image="/poang.jpg"
-    />
+    <Product name="POÄNG" category="Armchairs" price={129} image="/poang.jpg" />
   );
 }
 ```
@@ -115,11 +108,9 @@ The page should look like a product card: photo, name, category, and a readable 
 - `App.tsx` should stay thin: data + `<Product … />`. Layout of the card belongs in the Product component.
 - Optional stretch: render **two or three** products by using the same component more than once with different props.
 
-
-
 # Task 3
-    
-    Split the following HTML part into a component with the relevant props 
+
+    Split the following HTML part into a component with the relevant props
 
         <div className="users-page__toast-wrap">
           <div className="users-page__toast" role="alert">
@@ -140,3 +131,8 @@ The page should look like a product card: photo, name, category, and a readable 
             </button>
           </div>
         </div>
+
+# Task 4
+
+1. Add new button in the Users page - to load more users
+2. More users will be added in addition to the current state to the Data usersData
