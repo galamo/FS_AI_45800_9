@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import ErrorMessage from "../ErrorMessage"
 import Spinner from "../Spinner"
 import UserCard from "../UserCard"
+import UsersMap from "../UsersMap"
 import "./users-page.css"
 import type { SingleUserType } from "./user-type"
 import { getUsersApi } from "./users-api"
@@ -48,6 +49,8 @@ export default function UsersPage() {
       />
 
       {isLoading && <Spinner message="Loading users…" />}
+
+      {!isLoading && usersData.length > 0 && <UsersMap users={usersData} />}
 
       {!isLoading && (
         <div className="users-page__grid">
