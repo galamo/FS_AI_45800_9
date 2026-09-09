@@ -114,3 +114,29 @@ The page should look like a product card: photo, name, category, and a readable 
 - Format the price for display, for example `` `$${price}` `` or `` `${price} ₪` ``.
 - `App.tsx` should stay thin: data + `<Product … />`. Layout of the card belongs in the Product component.
 - Optional stretch: render **two or three** products by using the same component more than once with different props.
+
+
+
+# Task 3
+    
+    Split the following HTML part into a component with the relevant props 
+
+        <div className="users-page__toast-wrap">
+          <div className="users-page__toast" role="alert">
+            <span className="users-page__toast-icon" aria-hidden="true">
+              !
+            </span>
+            <div className="users-page__toast-body">
+              <p className="users-page__toast-title">Could not load users</p>
+              <p className="users-page__toast-message">{error}</p>
+            </div>
+            <button
+              type="button"
+              className="users-page__toast-close"
+              onClick={() => setError("")}
+              aria-label="Dismiss error"
+            >
+              ×
+            </button>
+          </div>
+        </div>
