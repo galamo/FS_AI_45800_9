@@ -32,4 +32,4 @@
 
 - Create a Rule, using slash command: /create-rule for writing JS and HTML code in seperated files, dont write JS and HTML together!
 
-# Homework 30/8
+# Homework 9/9
