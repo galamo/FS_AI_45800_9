@@ -37,11 +37,14 @@
 
 .users-page__actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   margin-top: 16px;
 }
 
-.users-page__load-more {
+.users-page__load-more,
+.users-page__clear {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -65,49 +68,71 @@
 }
 
 .users-page__load-more:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.users-page__clear:hover {
   border-color: #f87171;
   background: #fef2f2;
   color: #b91c1c;
   box-shadow: var(--shadow);
 }
 
-.users-page__load-more:focus-visible {
+.users-page__load-more:focus-visible,
+.users-page__clear:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 .users-page__load-more:active {
+  background: var(--accent-bg);
+}
+
+.users-page__clear:active {
   background: #fee2e2;
 }
 
-.users-page__load-more:disabled {
+.users-page__load-more:disabled,
+.users-page__clear:disabled {
   opacity: 0.45;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-.users-page__load-more:disabled:hover {
+.users-page__load-more:disabled:hover,
+.users-page__clear:disabled:hover {
   border-color: var(--border);
   background: var(--bg);
   color: var(--text-h);
 }
 
 @media (prefers-color-scheme: dark) {
-  .users-page__load-more {
+  .users-page__load-more,
+  .users-page__clear {
     box-shadow: none;
   }
 
   .users-page__load-more:hover {
+    border-color: var(--accent-border);
+    background: var(--accent-bg);
+    color: var(--accent);
+  }
+
+  .users-page__clear:hover {
     border-color: #f87171;
     background: #3f1d1d;
     color: #fecaca;
   }
 
-  .users-page__load-more:active {
+  .users-page__clear:active {
     background: #7f1d1d;
   }
 
-  .users-page__load-more:disabled:hover {
+  .users-page__load-more:disabled:hover,
+  .users-page__clear:disabled:hover {
     border-color: var(--border);
     background: var(--bg);
     color: var(--text-h);
