@@ -124,6 +124,7 @@ function FitUserBounds({ positions }: { positions: Array<[number, number]> }) {
 }
 
 export default function UsersMap(props: UsersMapProps) {
+  console.log("Ofer is rendering the component MAP ????")
   const { users } = props
   const usersKey = users.map((user) => user.login.uuid).join("|")
   const fallbackPoints = useMemo(() => getUserPoints(users), [users])

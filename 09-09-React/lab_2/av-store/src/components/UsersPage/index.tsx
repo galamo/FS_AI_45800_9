@@ -9,10 +9,15 @@ import type { SingleUserType } from "./user-type"
 import { getUsersApi } from "./users-api"
 
 export default function UsersPage() {
+  
+  console.log("Ofer is rendering the component????")
+
   const [usersData, setUsersData] = useState<Array<SingleUserType>>([])
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [showMap, setShowMap] = useState<boolean>(false)
+  console.log("Ofer is rendering the component2????")
 
   async function loadUsers(append: boolean) {
     try {
@@ -47,6 +52,7 @@ export default function UsersPage() {
       }
     }
   }
+  console.log("Ofer is rendering the component3????")
 
   useEffect(() => {
     loadUsers(false)
@@ -58,34 +64,6 @@ export default function UsersPage() {
         <h1>Users</h1>
         <p className="users-page__subtitle">People loaded from Random User</p>
       </header>
-
-      <ErrorMessage
-        title="Could not load users"
-        message={error}
-        onDismiss={() => setError("")}
-      />
-
-      {isLoading && <Spinner message="Loading users…" />}
-
-      {!isLoading && usersData.length > 0 && <UsersMap users={usersData} />}
-
-      {!isLoading && (
-        <div className="users-page__grid">
-          {usersData.map((singleUser) => (
-            <UserCard
-              key={singleUser.login.uuid}
-              user={singleUser}
-              onRemove={() => {
-                const restOfUsersWithoutThisOne = usersData.filter(
-                  (user) => user.login.uuid !== singleUser.login.uuid,
-                )
-                setUsersData(restOfUsersWithoutThisOne)
-              }}
-            />
-          ))}
-        </div>
-      )}
-
       <div className="users-page__actions">
         <button
           type="button"
@@ -110,6 +88,39 @@ export default function UsersPage() {
           Clear all Data
         </button>
       </div>
+      <ErrorMessage
+        title="Could not load users"
+        message={error}
+        onDismiss={() => setError("")}
+      />
+
+      {isLoading && <Spinner message="Loading users…" />}
+      <button   type="button"
+          className="users-page__load-more"  onClick={()=>{
+        setShowMap(!showMap)
+      }}>
+        {showMap ? "Hide Map" : "Show Map"} 
+      </button>
+      {!isLoading && usersData.length > 0 && showMap && <UsersMap users={usersData} />}
+
+      {!isLoading && (
+        <div className="users-page__grid">
+          {usersData.map((singleUser) => (
+            <UserCard
+              key={singleUser.login.uuid}
+              user={singleUser}
+              onRemove={() => {
+                const restOfUsersWithoutThisOne = usersData.filter(
+                  (user) => user.login.uuid !== singleUser.login.uuid,
+                )
+                setUsersData(restOfUsersWithoutThisOne)
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+     
 
 
     </section>

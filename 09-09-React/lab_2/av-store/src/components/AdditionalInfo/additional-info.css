@@ -1,0 +1,40 @@
+.additional-info {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--social-bg);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.additional-info dl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.additional-info__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.additional-info__row dt {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.additional-info__row dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 140%;
+  color: var(--text-h);
+  text-align: right;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "av-suites",
+  "version": "1.0.0",
+  "description": "Statistics for suite sales: revenue, price range, and breakdowns by brand and color.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "suites",
+    "sales",
+    "statistics"
+  ],
+  "author": "",
+  "license": "ISC"
+}
