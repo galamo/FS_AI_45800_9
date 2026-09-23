@@ -2,6 +2,9 @@ import { useState } from "react"
 import AdditionalInfo from "../AdditionalInfo"
 import "./user-card.css"
 import type { SingleUserType } from "../../pages/UsersPage/user-type"
+import { Chip } from "@mui/material"
+import { useAppContext } from "../../context/AppContext"
+import { format } from "date-fns"
 
 type UserCardProps = {
   user: SingleUserType
@@ -9,10 +12,16 @@ type UserCardProps = {
 }
 
 export default function UserCard(props: UserCardProps) {
+  
+  
   const { user, onRemove } = props
   const { name, gender, picture, email, location } = user
   const fullName = `${name.title} ${name.first} ${name.last}`
   const [showDetails, setShowDetails] = useState(false)
+  const { settings } = useAppContext()
+  const { isLocalTime } = settings
+
+  const timeStamp =  format(isLocalTime ? new Date(user.registered.date).toLocaleString() : user.registered.date, "dd/MMM/yyyy HH:mm") 
 
   return (
     <article className="user-card">
@@ -29,7 +38,11 @@ export default function UserCard(props: UserCardProps) {
         <p className="user-card__email">{email}</p>
         <p className="user-card__location">
           {location.city}, {location.country}
+         
         </p>
+        <div>
+        <Chip label={timeStamp} color="primary" />
+        </div>
       </div>
       <button
         type="button"

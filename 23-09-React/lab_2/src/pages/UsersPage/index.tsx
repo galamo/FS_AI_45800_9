@@ -4,6 +4,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import Spinner from "../../components/Spinner"
 import UserCard from "../../components/UserCard"
 import UsersMap from "../../components/UsersMap"
+import { useAppContext } from "../../context/AppContext"
 import "./users-page.css"
 import type { SingleUserType } from "./user-type"
 import { getUsersApi } from "./users-api"
@@ -21,11 +22,12 @@ function toErrorMessage(err: unknown) {
 }
 
 export default function UsersPage() {
+  const { settings } = useAppContext()
+  const { showMap } = settings
   const [usersData, setUsersData] = useState<Array<SingleUserType>>([])
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
-  const [showMap, setShowMap] = useState<boolean>(true)
 
   async function loadUsers(append: boolean) {
     try {
@@ -122,15 +124,6 @@ export default function UsersPage() {
       />
 
       {isLoading && <Spinner message="Loading users…" />}
-      <button
-        type="button"
-        className="users-page__load-more users-page__map-toggle"
-        onClick={() => {
-          setShowMap((current) => !current)
-        }}
-      >
-        {showMap ? "Hide Map" : "Show Map"}
-      </button>
       {!isLoading && usersData.length > 0 && showMap && <UsersMap users={usersData} />}
 
       {!isLoading && (
