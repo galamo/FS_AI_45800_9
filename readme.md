@@ -555,3 +555,8 @@ Before submitting the exercise, verify:
 - [ ] No solution code was copied from the exercise instructions.
 
 ---
+
+# 23-09
+
+- Create New Route inside the /23-09-React/lab_2
+- Name /users => component UsersPage
