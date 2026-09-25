@@ -2,18 +2,21 @@ import { useState } from "react"
 import AdditionalInfo from "../AdditionalInfo"
 import "./user-card.css"
 import type { SingleUserType } from "../../pages/UsersPage/user-type"
-import { Chip } from "@mui/material"
+import { Button, Chip } from "@mui/material"
+import FavoriteIcon from "@mui/icons-material/Favorite"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import { useAppContext } from "../../context/AppContext"
 import { format } from "date-fns"
+import { useFavoritesContext } from "../../context/FavoritesContext"
 
 type UserCardProps = {
   user: SingleUserType
-  onRemove: () => void
+  onRemove?: () => void
 }
 
 export default function UserCard(props: UserCardProps) {
-  
-  
+
+
   const { user, onRemove } = props
   const { name, gender, picture, email, location } = user
   const fullName = `${name.title} ${name.first} ${name.last}`
@@ -21,8 +24,12 @@ export default function UserCard(props: UserCardProps) {
   const { settings } = useAppContext()
   const { isLocalTime } = settings
 
-  const timeStamp =  format(isLocalTime ? new Date(user.registered.date).toLocaleString() : user.registered.date, "dd/MMM/yyyy HH:mm") 
+  const timeStamp = format(isLocalTime ? new Date(user.registered.date).toLocaleString() : user.registered.date, settings.dateFormat)
+  const { favorites, addFavorite } = useFavoritesContext()
 
+  const isFavorite = favorites.some(
+    favorite => favorite.login.uuid === user.login.uuid
+  )
   return (
     <article className="user-card">
       <img
@@ -38,10 +45,10 @@ export default function UserCard(props: UserCardProps) {
         <p className="user-card__email">{email}</p>
         <p className="user-card__location">
           {location.city}, {location.country}
-         
+
         </p>
         <div>
-        <Chip label={timeStamp} color="primary" />
+          <Chip label={timeStamp} color="primary" />
         </div>
       </div>
       <button
@@ -55,13 +62,37 @@ export default function UserCard(props: UserCardProps) {
         {showDetails ? "Hide info" : "More info"}
       </button>
       {showDetails && <AdditionalInfo user={user} />}
-      <button
+      {onRemove && (
+        <button
+          type="button"
+          className="user-card__remove"
+          onClick={onRemove}
+        >
+          Remove User
+        </button>
+      )}
+      <Button
         type="button"
-        className="user-card__remove"
-        onClick={onRemove}
+        variant="outlined"
+        fullWidth
+        disabled={isFavorite}
+        startIcon={
+          isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />
+        }
+        onClick={() => addFavorite(user)}
+        sx={{
+          borderRadius: "10px",
+          textTransform: "none",
+          minHeight: 40,
+          "&.Mui-disabled": {
+            color: "primary.main",
+            borderColor: "primary.light",
+            backgroundColor: "action.hover",
+          },
+        }}
       >
-        Remove User
-      </button>
+        {isFavorite ? "Added to favorites" : "Add to favorites"}
+      </Button>
     </article>
   )
 }

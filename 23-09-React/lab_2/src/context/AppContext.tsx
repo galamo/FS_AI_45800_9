@@ -8,6 +8,7 @@ import {
 type AppSettings = {
   showMap: boolean;
   isLocalTime:boolean
+  dateFormat:string
 }
 
 type AppContextValue = {
@@ -17,7 +18,8 @@ type AppContextValue = {
 
 const defaultSettings: AppSettings = {
   showMap: true,
-  isLocalTime:true
+  isLocalTime:true,
+  dateFormat: "dd/MMM/yyyy HH:mm"
 }
 
 const AppContext = createContext<AppContextValue | null>(null)
