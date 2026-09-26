@@ -5,6 +5,7 @@ import PeopleIcon from '@mui/icons-material/People'
 import SettingsIcon from '@mui/icons-material/Settings'
 import type { SvgIconProps } from '@mui/material/SvgIcon'
 import type { ComponentType } from 'react'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 export type NavItem = {
   to: string
@@ -18,5 +19,6 @@ export const navItems: NavItem[] = [
   { to: '/dashboard', label: 'Dashboard', icon: DashboardIcon },
   { to: '/reports', label: 'Reports', icon: AssessmentIcon },
   { to: '/users', label: 'Users', icon: PeopleIcon },
+  { to: '/favorites', label: 'Favorites', icon: FavoriteIcon },
   { to: '/settings', label: 'Settings', icon: SettingsIcon },
 ]
