@@ -7,6 +7,9 @@ import Typography from '@mui/material/Typography'
 import { useAppContext } from '../../context/AppContext'
 import '../page.css'
 import {  Schedule } from '@mui/icons-material'
+import TextField from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import DateRangeIcon from "@mui/icons-material/DateRange"
 
 export default function SettingsPage() {
   const { settings, setSetting } = useAppContext()
@@ -49,7 +52,9 @@ export default function SettingsPage() {
               onChange={(_, checked) => {
                 setSetting('showMap', checked)
               }}
-              inputProps={{ 'aria-label': 'Show users map' }}
+              slotProps={{
+                input: { 'aria-label': 'Show users map' }
+              }}
             />
           }
         />
@@ -86,6 +91,40 @@ export default function SettingsPage() {
           }
         />
       </Paper>
+      <Paper
+  variant="outlined"
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    gap: 1.5,
+    px: 2,
+    py: 1.5,
+  }}
+>
+  <DateRangeIcon color="primary" aria-hidden />
+
+  <TextField
+    select
+    id="date-format"
+    label="Date format"
+    value={settings.dateFormat}
+    onChange={(event) => {
+      setSetting("dateFormat", event.target.value)
+    }}
+    fullWidth
+    size="small"
+  >
+    <MenuItem value="dd/MMM/yyyy HH:mm">
+      dd/MMM/yyyy HH:mm
+    </MenuItem>
+    <MenuItem value="dd/MM/yy HH:mm:ss">
+      dd/MM/yy HH:mm:ss
+    </MenuItem>
+    <MenuItem value="dd-MMM-yyyy HH:mm:ss">
+      dd-MMM-yyyy HH:mm:ss
+    </MenuItem>
+  </TextField>
+</Paper>
     </section>
   )
 }
