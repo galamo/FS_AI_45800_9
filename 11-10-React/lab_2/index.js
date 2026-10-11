@@ -1,5 +1,10 @@
 const express = require("express");
-
+// nodejs as single thread
+// nodejs as single thread
+// nodejs as single thread
+// nodejs as single thread
+// nodejs as single thread
+// nodejs as single thread
 const app = express();
 
 app.get("/", (req, res) => {
