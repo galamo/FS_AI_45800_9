@@ -1,5 +1,13 @@
+const express = require("express");
 
-setTimeout(() => {
-    console.log("this is running inside my MAC this is nodejs code, js code call it what you want ")
-    
-}, 20_000);
+const app = express();
+
+app.get("/", (req, res) => {
+    const param = req.query.param;
+    res.json({ message: "Hello World" + param});
+});
+
+app.listen(3000, (error) => {
+    console.log(error)
+    console.log("Server is running on port 3000");
+});
