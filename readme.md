@@ -639,3 +639,11 @@ The format will affect the entire application date presentation.
 
 - add new entry point to the api - /dogs
 - the api will return dogs list - make it constant
+
+# Homework
+1. Create New API 
+2. Api should support the following entrypoints:
+ -  GET /Products
+ -  GET /Categories
+ -  GET /Category?id=[ID]
+All the data should be dummy data constant inside the application
