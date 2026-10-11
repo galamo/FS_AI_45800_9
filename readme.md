@@ -622,3 +622,8 @@ The format will affect the entire application date presentation.
 
 1. Registration page, userName, password, phone, gender, company
 2. Registration page with input validaitons + useRef
+
+# 11-10
+
+1. ZOD input validation
+2. support the ZOD input validation for your registration page.
