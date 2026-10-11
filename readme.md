@@ -625,5 +625,11 @@ The format will affect the entire application date presentation.
 
 # 11-10
 
+# 1
 1. ZOD input validation
 2. support the ZOD input validation for your registration page.
+
+# 2
+- npm run build
+- npm run preview 
+

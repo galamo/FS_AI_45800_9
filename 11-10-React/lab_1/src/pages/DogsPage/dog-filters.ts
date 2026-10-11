@@ -49,7 +49,6 @@ export function uniqueSorted(values: Iterable<string>) {
 export function filterDogBreeds(breeds: readonly DogBreed[], filters: DogTableFilters) {
   const query = filters.query.trim().toLowerCase()
   const types = new Set(filters.dogTypes)
-  const dogsTypesArray = filters.dogTypes
   const hypoallergenic = new Set(filters.hypoallergenic)
 
   return breeds.filter((breed) => {

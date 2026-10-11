@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { writeVisibleDogColumns } from "../pages/DogsPage/dog-columns"
 import { dogsReducer } from "./dogsReducer"
 import { favoritesReducer } from "./favoritesReducer"
 import { jokesReducer } from "./jokesReducer"

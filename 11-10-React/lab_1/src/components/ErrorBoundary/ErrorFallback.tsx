@@ -1,6 +1,5 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutlineOutlined'
 import Button from '@mui/material/Button'
-import { useLocation, useNavigate } from 'react-router-dom'
 import './error-fallback.css'
 
 type ErrorFallbackProps = {
@@ -8,8 +7,6 @@ type ErrorFallbackProps = {
 }
 
 export default function ErrorFallback({ onRetry }: ErrorFallbackProps) {
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
 
   const goHome = () => {
 

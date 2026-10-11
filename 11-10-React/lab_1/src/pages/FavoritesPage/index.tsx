@@ -1,6 +1,6 @@
 import UserCard from "../../components/UserCard"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { removeFavorite, selectFavoriteUsers, clearFavorites } from "../../store/favoritesReducer"
+import { removeFavorite, clearFavorites } from "../../store/favoritesReducer"
 import "./favorites-page.css"
 
 export default function FavoritesPage() {
