@@ -168,7 +168,14 @@ export default function DogsReportsPage() {
       <div className="dogs-reports__stats">
         <article className="dogs-reports__stat">
           <span >On this page</span>
-           <button onClick={() => setCounter(counter + 1)}>+</button>
+           <button onClick={() => {
+            if(counter >10){
+              setCounter(counter + 5)
+            }else{
+              setCounter(counter + 1)
+            }
+            
+           }}>+</button>
           <strong>{breeds.length}</strong>
         </article>
         <article className="dogs-reports__stat">
