@@ -1,15 +1,15 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import ErrorMessage from "../../components/ErrorMessage"
 import Spinner from "../../components/Spinner"
 import UserCard from "../../components/UserCard"
-import UsersMap from "../../components/UsersMap"
-import { useAppContext } from "../../context/AppContext"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { addFavorite } from "../../store/favoritesReducer"
 import "./users-page.css"
 import type { SingleUserType } from "./user-type"
 import { getUsersApi } from "./users-api"
+
+const UsersMap = lazy(() => import("../../components/UsersMap"))
 
 function toErrorMessage(err: unknown) {
   if (axios.isAxiosError(err)) {
@@ -129,7 +129,11 @@ export default function UsersPage() {
       />
 
       {isLoading && <Spinner message="Loading users…" />}
-      {!isLoading && usersData.length > 0 && showMap && <UsersMap users={usersData} />}
+      {!isLoading && usersData.length > 0 && showMap && (
+        <Suspense fallback={<Spinner message="Loading map…" />}>
+          <UsersMap users={usersData} />
+        </Suspense>
+      )}
 
       {!isLoading && (
         <div className="users-page__grid">
