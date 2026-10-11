@@ -142,6 +142,8 @@ function ColumnsResetButton() {
     visibleColumns.every((id, index) => id === DOG_COLUMN_IDS[index])
 
   return (
+    
+    
     <Button
       variant="outlined"
       disabled={isDefault}
@@ -152,6 +154,7 @@ function ColumnsResetButton() {
     >
       Reset columns
     </Button>
+    
   )
 }
 
