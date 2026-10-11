@@ -1,0 +1,121 @@
+.dogs-reports {
+  --text: #6b6375;
+  --text-h: #08060d;
+
+  width: 100%;
+  margin: 0 auto 24px;
+  text-align: left;
+}
+
+.dogs-reports p {
+  margin: 0;
+}
+
+.dogs-reports__header {
+  margin-bottom: 20px;
+}
+
+.dogs-reports__header h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-h);
+}
+
+.dogs-reports__header p,
+.dogs-reports__card p {
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.dogs-reports__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dogs-reports__stat {
+  padding: 16px;
+  border: 1px solid #e5e4e7;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.dogs-reports__stat span,
+.dogs-reports__stat em {
+  display: block;
+  color: var(--text);
+  font-size: 13px;
+  font-style: normal;
+}
+
+.dogs-reports__stat strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-h);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.dogs-reports__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.dogs-reports__card {
+  padding: 16px 16px 8px;
+  border-radius: 14px;
+}
+
+.dogs-reports__card--wide {
+  grid-column: 1 / -1;
+}
+
+.dogs-reports__card h2 {
+  margin: 0 0 4px;
+  color: var(--text-h);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.dogs-reports__card p {
+  margin-bottom: 8px;
+}
+
+.dogs-reports__filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.dogs-reports__filter select {
+  min-width: 180px;
+  padding: 6px 8px;
+  border: 1px solid #e5e4e7;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text-h);
+  font: inherit;
+}
+
+.dogs-reports__chart-empty {
+  padding: 48px 12px;
+  text-align: center;
+}
+
+.dogs-reports__empty {
+  padding: 28px 20px;
+  border: 1px dashed #e5e4e7;
+  border-radius: 14px;
+  color: var(--text);
+  background: #fff;
+}

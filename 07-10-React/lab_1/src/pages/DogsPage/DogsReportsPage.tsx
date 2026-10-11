@@ -1,16 +1,128 @@
 import Paper from "@mui/material/Paper"
 import { BarChart } from "@mui/x-charts/BarChart"
 import { PieChart } from "@mui/x-charts/PieChart"
-import type { ReactNode } from "react"
+import { useMemo, useState, type ReactNode } from "react"
 import { useAppSelector } from "../../store/hooks"
-import { buildDogCharts, chartHeight, formatChartNumber } from "./dog-charts"
+import {
+  buildCoatSlices,
+  buildDogCharts,
+  buildHypoallergenicSlices,
+  chartHeight,
+  coatTypeLabel,
+  countryLabel,
+  formatChartNumber,
+} from "./dog-charts"
+import type { DogBreed } from "./dog-type"
 import "./dogs-reports.css"
+
+const ALL = "all"
 
 type ChartCardProps = {
   title: string
   subtitle: string
   wide?: boolean
   children: ReactNode
+}
+
+function sortedUnique(breeds: readonly DogBreed[], labelOf: (breed: DogBreed) => string) {
+  return [...new Set(breeds.map(labelOf))].sort((left, right) => left.localeCompare(right))
+}
+
+function CoatTypesPie({ breeds, counter }: { breeds: DogBreed[], counter: number }) {
+  const [country, setCountry] = useState(ALL)
+  const countries = sortedUnique(breeds, countryLabel)
+
+  const coats = useMemo(() => {
+    const filtered =
+      country === ALL ? breeds : breeds.filter((breed) => countryLabel(breed) === country)
+    console.log("useMemo: coat types pie", { country, breeds: filtered.length })
+    return buildCoatSlices(filtered)
+  }, [breeds, country,counter])
+
+  return (
+    <ChartCard title="Coat types" subtitle="How many breeds on this page share each coat.">
+      <label className="dogs-reports__filter">
+        Country
+        <select value={country} onChange={(event) => setCountry(event.target.value)}>
+          <option value={ALL}>All countries</option>
+          {countries.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </label>
+      {coats.length === 0 ? (
+        <p className="dogs-reports__chart-empty">No breeds match this filter.</p>
+      ) : (
+        <PieChart
+          height={320}
+          series={[
+            {
+              data: coats,
+              innerRadius: 58,
+              outerRadius: 108,
+              paddingAngle: 2,
+              cornerRadius: 4,
+              arcLabel: "value",
+              arcLabelMinAngle: 18,
+            },
+          ]}
+        />
+      )}
+    </ChartCard>
+  )
+}
+
+function HypoallergenicPie({ breeds }: { breeds: DogBreed[] }) {
+  const [coatType, setCoatType] = useState(ALL)
+  const coatTypes = sortedUnique(breeds, coatTypeLabel)
+
+//   const filtered =
+//   coatType === ALL ? breeds : breeds.filter((breed) => coatTypeLabel(breed) === coatType)
+// console.log("useMemo: hypoallergenic pie", { coatType, breeds: filtered.length })
+// const hypoallergenic = buildHypoallergenicSlices(filtered)
+
+  const hypoallergenic = useMemo(() => {
+    const filtered =
+      coatType === ALL ? breeds : breeds.filter((breed) => coatTypeLabel(breed) === coatType)
+    console.log("useMemo: hypoallergenic pie", { coatType, breeds: filtered.length })
+    return buildHypoallergenicSlices(filtered)
+  }, [breeds, coatType])
+
+  return (
+    <ChartCard title="Hypoallergenic" subtitle="Breeds marked hypoallergenic versus the rest.">
+      <label className="dogs-reports__filter">
+        Coat type
+        <select value={coatType} onChange={(event) => setCoatType(event.target.value)}>
+          <option value={ALL}>All coat types</option>
+          {coatTypes.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </label>
+      {hypoallergenic.length === 0 ? (
+        <p className="dogs-reports__chart-empty">No breeds match this filter.</p>
+      ) : (
+        <PieChart
+          height={320}
+          series={[
+            {
+              data: hypoallergenic,
+              innerRadius: 58,
+              outerRadius: 108,
+              paddingAngle: 2,
+              cornerRadius: 4,
+              arcLabel: "value",
+              arcLabelMinAngle: 12,
+            },
+          ]}
+        />
+      )}
+    </ChartCard>
+  )
 }
 
 function ChartCard({ title, subtitle, wide = false, children }: ChartCardProps) {
@@ -28,6 +140,7 @@ function ChartCard({ title, subtitle, wide = false, children }: ChartCardProps) 
 export default function DogsReportsPage() {
   const { breeds, status, page, totalRecords } = useAppSelector((state) => state.dogs)
   const charts = buildDogCharts(breeds)
+  const [counter, setCounter] = useState(0)
   const isPending = status === "idle" || status === "pending"
 
   if (breeds.length === 0) {
@@ -45,7 +158,7 @@ export default function DogsReportsPage() {
   return (
     <section className="dogs-reports" aria-busy={isPending}>
       <header className="dogs-reports__header">
-        <h1>Dog reports</h1>
+        <h1>Dog reports {counter}</h1>
         <p>
           Charts for page {page} of the Dog API ({breeds.length} breeds on this page, {totalRecords}{" "}
           in the catalog). Same Redux data as the breeds table.
@@ -54,7 +167,8 @@ export default function DogsReportsPage() {
 
       <div className="dogs-reports__stats">
         <article className="dogs-reports__stat">
-          <span>On this page</span>
+          <span >On this page</span>
+           <button onClick={() => setCounter(counter + 1)}>+</button>
           <strong>{breeds.length}</strong>
         </article>
         <article className="dogs-reports__stat">
@@ -77,39 +191,8 @@ export default function DogsReportsPage() {
       </div>
 
       <div className="dogs-reports__grid">
-        <ChartCard title="Coat types" subtitle="How many breeds on this page share each coat.">
-          <PieChart
-            height={320}
-            series={[
-              {
-                data: charts.coats,
-                innerRadius: 58,
-                outerRadius: 108,
-                paddingAngle: 2,
-                cornerRadius: 4,
-                arcLabel: "value",
-                arcLabelMinAngle: 18,
-              },
-            ]}
-          />
-        </ChartCard>
-
-        <ChartCard title="Hypoallergenic" subtitle="Breeds marked hypoallergenic versus the rest.">
-          <PieChart
-            height={320}
-            series={[
-              {
-                data: charts.hypoallergenic,
-                innerRadius: 58,
-                outerRadius: 108,
-                paddingAngle: 2,
-                cornerRadius: 4,
-                arcLabel: "value",
-                arcLabelMinAngle: 12,
-              },
-            ]}
-          />
-        </ChartCard>
+        <CoatTypesPie breeds={breeds} counter={counter}/>
+        <HypoallergenicPie breeds={breeds} />
 
         <ChartCard
           title="Breeds by country"

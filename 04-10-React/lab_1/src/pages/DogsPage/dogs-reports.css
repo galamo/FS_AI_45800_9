@@ -87,6 +87,31 @@
   margin-bottom: 8px;
 }
 
+.dogs-reports__filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.dogs-reports__filter select {
+  min-width: 180px;
+  padding: 6px 8px;
+  border: 1px solid #e5e4e7;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text-h);
+  font: inherit;
+}
+
+.dogs-reports__chart-empty {
+  padding: 48px 12px;
+  text-align: center;
+}
+
 .dogs-reports__empty {
   padding: 28px 20px;
   border: 1px dashed #e5e4e7;

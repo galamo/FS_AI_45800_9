@@ -54,6 +54,15 @@ function titleCase(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
+export function coatTypeLabel(breed: DogBreed) {
+  const type = breed.attributes.coat?.type
+  return type ? titleCase(type) : "Unknown"
+}
+
+export function countryLabel(breed: DogBreed) {
+  return breed.attributes.origin?.country || "Unknown"
+}
+
 function countBy(breeds: DogBreed[], labelOf: (breed: DogBreed) => string) {
   const counts = new Map<string, number>()
 
@@ -78,18 +87,11 @@ function toSlices(rows: { label: string; value: number }[]) {
     }))
 }
 
-export function buildDogCharts(breeds: DogBreed[]): DogCharts {
-  const coats = toSlices(
-    countBy(breeds, (breed) => {
-      const type = breed.attributes.coat?.type
-      return type ? titleCase(type) : "Unknown"
-    }),
-  )
+export function buildCoatSlices(breeds: DogBreed[]) {
+  return toSlices(countBy(breeds, coatTypeLabel))
+}
 
-  const countries = toSlices(
-    countBy(breeds, (breed) => breed.attributes.origin?.country || "Unknown"),
-  )
-
+export function buildHypoallergenicSlices(breeds: DogBreed[]) {
   const hypoallergenicCount = breeds.filter((breed) => breed.attributes.hypoallergenic).length
   const hypoallergenic = toSlices([
     { label: "Hypoallergenic", value: hypoallergenicCount },
@@ -101,6 +103,18 @@ export function buildDogCharts(breeds: DogBreed[]): DogCharts {
   if (hypoallergenic[1]?.label === "Not hypoallergenic") {
     hypoallergenic[1].color = "#90a4ae"
   }
+
+  return hypoallergenic
+}
+
+export function buildDogCharts(breeds: DogBreed[]): DogCharts {
+  const coats = buildCoatSlices(breeds)
+
+  const countries = toSlices(countBy(breeds, countryLabel))
+
+  const hypoallergenic = buildHypoallergenicSlices(breeds)
+  const hypoallergenicCount =
+    hypoallergenic.find((slice) => slice.label === "Hypoallergenic")?.value ?? 0
 
   const weights = breeds
     .flatMap((breed) => {

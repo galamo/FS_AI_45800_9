@@ -1,0 +1,28 @@
+.dogs-layout__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dogs-layout__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid #d7d4dc;
+  border-radius: 999px;
+  color: #08060d;
+  background: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dogs-layout__link--active {
+  border-color: #1565c0;
+  color: #fff;
+  background: #1565c0;
+}
+
+.dogs-layout__progress {
+  margin-bottom: 16px;
+}
