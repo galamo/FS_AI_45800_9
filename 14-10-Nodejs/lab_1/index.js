@@ -6,21 +6,45 @@ const PORT  = process.env.PORT;
 
 const app = express();
 console.log("Starting Nodejs Server API");
+app.use((req,res,next)=>{
+    console.log(`[${new Date().toISOString()}] Request received ${req.method} ${req.url}`);
+    next()
+})
+
+app.use((req, res, next) => {
+  const startedAt = performance.now();
+  res.on("finish", () => {
+    const durationMs = performance.now() - startedAt;
+    console.log(
+      `[${new Date().toISOString()}] ${req.method} ${req.url} ${res.statusCode} ${durationMs.toFixed(2)}ms`
+    );
+  });
+
+  next();
+});
+
+
 
 // middleware every request will pass through this middleware
 app.use((req,res,next)=>{
-    // implement authorization access logic
-    // if the userName and password from the query params are correct ? env=almog, pass=1234
-    // then continue next - 
-    // otherwise return 401 
-
-    console.log("Request received");
-    return res.send("U turn")
-    next()
+   
+   const user = req.query.user;
+   const password = req.query.password;
+   const envMasterUser = process.env?.MASTER_USER?.toLowerCase();
+   const envMasterPassword = process.env?.MASTER_PASSWORD?.toLowerCase();
+   
+   if(user === envMasterUser && password === envMasterPassword){
+        next()
+    }else{
+        return res.status(401).send("Unauthorized")
+    }
 });
 
-app.get("/almog/going/crazy", (req, res) => {
-  res.status(200).send("You are Crazy!!!");
+app.get("/users", (req, res) => {
+    setTimeout(() => {
+        res.status(200).send("users!!!");
+    }, 1000);
+    
 });
 
 app.get("/do-something", (req, res) => {
