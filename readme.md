@@ -640,10 +640,32 @@ The format will affect the entire application date presentation.
 - add new entry point to the api - /dogs
 - the api will return dogs list - make it constant
 
-# Homework
-1. Create New API 
+### Homework
+
+1. Create New API
 2. Api should support the following entrypoints:
- -  GET /Products
- -  GET /Categories
- -  GET /Category?id=[ID]
-All the data should be dummy data constant inside the application
+
+- GET /Products
+- GET /Categories
+- GET /Category?id=[ID]
+  All the data should be dummy data constant inside the application
+
+# 14-10
+
+## Homework
+
+- Build New Node.js Express API - Bank management
+- Support middleware: Logrequest, duraiton, requestId, authorization.
+- The API will have the following entypoint:
+
+GET /bank-accounts return list of dummy accounts
+GET /bank-accounts?acid="BANK_ACCOUNT_ID" return the account witht the bank account id
+GET /bank-accounts?owner="OWNER_NAME" - return list accounts which
+
+account example
+{
+id: "ba_12_abc",
+balance:1000,
+currency: "ILS"
+owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"bc", role:"view"}]
+}
