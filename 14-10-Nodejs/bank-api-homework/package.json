@@ -1,0 +1,17 @@
+{
+  "name": "bank-api-homework",
+  "version": "1.0.0",
+  "description": "Bank accounts API homework",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0"
+  }
+}
