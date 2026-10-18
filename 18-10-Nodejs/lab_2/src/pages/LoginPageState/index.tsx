@@ -1,19 +1,25 @@
 import { useState, type FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import Spinner from '../../components/Spinner'
+import { clearLoginError, login } from '../../store/authReducer'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import '../page.css'
 import '../login-form.css'
 import { hasLoginErrors, validateLogin, type LoginErrors } from '../login-validation'
-import axios from 'axios'
 
 export default function LoginPageState() {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { status, error } = useAppSelector((state) => state.auth)
+  const isPending = status === 'pending'
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<LoginErrors>({})
   const [attempted, setAttempted] = useState(false)
-  const [signedInAs, setSignedInAs] = useState<string | null>(null)
 
   const showErrors = (nextUsername: string, nextPassword: string) => {
     const nextErrors = validateLogin({ username: nextUsername, password: nextPassword })
@@ -26,39 +32,34 @@ export default function LoginPageState() {
     setAttempted(true)
     const nextErrors = showErrors(username, password)
     if (hasLoginErrors(nextErrors)) {
-      setSignedInAs(null)
+      dispatch(clearLoginError())
       return
     }
-    setSignedInAs(username.trim())
-    const response = await axios.post('http://localhost:3000/auth/login', {
-      username,
-      password,
-    })
-    if (response.status === 200) {
-      setSignedInAs(username.trim())
-    } else {
-      setSignedInAs(null)
-      setErrors({ username: 'Invalid username or password' })
+
+    const result = await dispatch(login({ username: username.trim(), password }))
+    if (login.fulfilled.match(result)) {
+      navigate('/jokes')
     }
   }
 
   return (
-    <section className="page">
+    <section className="page" aria-busy={isPending}>
       <Typography variant="h4" component="h2">
         Login with state
       </Typography>
       <p className="page__lead">
-        User name and password live in useState. Typing updates that state, and validation runs again after the first submit.
+        User name and password live in useState. The login request runs through Redux, with a spinner while it is in progress.
       </p>
       <form className="login-form" onSubmit={handleSubmit} noValidate>
         <TextField
           label="User name"
           name="username"
           value={username}
+          disabled={isPending}
           onChange={(event) => {
             const nextUsername = event.target.value
             setUsername(nextUsername)
-            setSignedInAs(null)
+            dispatch(clearLoginError())
             if (attempted) {
               showErrors(nextUsername, password)
             }
@@ -73,10 +74,11 @@ export default function LoginPageState() {
           name="password"
           type="password"
           value={password}
+          disabled={isPending}
           onChange={(event) => {
             const nextPassword = event.target.value
             setPassword(nextPassword)
-            setSignedInAs(null)
+            dispatch(clearLoginError())
             if (attempted) {
               showErrors(username, nextPassword)
             }
@@ -86,12 +88,13 @@ export default function LoginPageState() {
           autoComplete="current-password"
           fullWidth
         />
-        <Button type="submit" variant="contained">
-          Submit
+        <Button type="submit" variant="contained" disabled={isPending}>
+          {isPending ? 'Signing in…' : 'Submit'}
         </Button>
-        {signedInAs && (
-          <Alert severity="success" role="status">
-            Welcome, {signedInAs}.
+        {isPending && <Spinner message="Signing in…" />}
+        {status === 'failed' && error && (
+          <Alert severity="error" role="alert">
+            {error}
           </Alert>
         )}
       </form>

@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { authReducer } from "./authReducer"
 import { dogsReducer } from "./dogsReducer"
 import { favoritesReducer } from "./favoritesReducer"
 import { jokesReducer } from "./jokesReducer"
@@ -6,6 +7,7 @@ import { settingsReducer } from "./settingsReducer"
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     dogs: dogsReducer,
     favorites: favoritesReducer,
     jokes: jokesReducer,

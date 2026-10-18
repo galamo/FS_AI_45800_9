@@ -40,7 +40,7 @@ export default function App() {
                 <Route element={<SuspenseRoute />}>
                   <Route index element={<HomePage />} />
                   <Route path="login-state" element={<LoginPageState />} />
-                  <Route path="login-ref" element={<LoginPageRef />} />
+                  {/* <Route path="login-ref" element={<LoginPageRef />} /> */}
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="reports" element={<ReportsPage />} />
                   <Route path="users" element={<UsersPage />} />

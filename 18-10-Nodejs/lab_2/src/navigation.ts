@@ -21,7 +21,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { to: '/', label: 'Home', icon: HomeIcon, end: true },
   { to: '/login-state', label: 'Login (state)', icon: LoginIcon },
-  { to: '/login-ref', label: 'Login (ref)', icon: PasswordIcon },
+  // { to: '/login-ref', label: 'Login (ref)', icon: PasswordIcon },
   { to: '/dashboard', label: 'Dashboard', icon: DashboardIcon },
   { to: '/reports', label: 'Reports', icon: AssessmentIcon },
   { to: '/users', label: 'Users', icon: PeopleIcon },

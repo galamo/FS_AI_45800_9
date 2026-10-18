@@ -676,3 +676,7 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 
 - Support new Entry point - /GET email-exist?email=gal
 - The response will return true if the user exist or false if not
+
+# Ex 2
+
+- implement register flow with the client side
