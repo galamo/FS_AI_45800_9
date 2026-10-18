@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
+import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import Spinner from '../../components/Spinner'
@@ -14,7 +15,7 @@ import { hasLoginErrors, validateLogin, type LoginErrors } from '../login-valida
 export default function LoginPageState() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { status, error } = useAppSelector((state) => state.auth)
+  const { status, error, registerStatus, registerMessage } = useAppSelector((state) => state.auth)
   const isPending = status === 'pending'
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -97,6 +98,14 @@ export default function LoginPageState() {
             {error}
           </Alert>
         )}
+        {registerStatus === 'succeeded' && registerMessage && (
+          <Alert severity="success" role="status">
+            {registerMessage}. Sign in with the account you just created.
+          </Alert>
+        )}
+        <Link component={RouterLink} to="/register">
+          Need an account? Register
+        </Link>
       </form>
     </section>
   )

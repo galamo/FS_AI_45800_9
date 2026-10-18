@@ -8,6 +8,6 @@ const authRouter = Router();
 
 authRouter.get("/healthcheck", healthcheck);
 authRouter.post("/login", login);
-authRouter.post("/register", register);
+authRouter.post("/register", validateRegister, register);
 
 export default authRouter;

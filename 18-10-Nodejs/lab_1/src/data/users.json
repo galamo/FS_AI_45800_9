@@ -2,15 +2,28 @@
   "results": [
     {
       "gender": "female",
-      "name": { "title": "Ms", "first": "نازنین", "last": "احمدی" },
+      "name": {
+        "title": "Ms",
+        "first": "نازنین",
+        "last": "احمدی"
+      },
       "location": {
-        "street": { "number": 9414, "name": "جلال آل احمد" },
+        "street": {
+          "number": 9414,
+          "name": "جلال آل احمد"
+        },
         "city": "ساری",
         "state": "یزد",
         "country": "Iran",
         "postcode": 42050,
-        "coordinates": { "latitude": "19.6557", "longitude": "95.9039" },
-        "timezone": { "offset": "+3:00", "description": "Baghdad, Riyadh, Moscow, St. Petersburg" }
+        "coordinates": {
+          "latitude": "19.6557",
+          "longitude": "95.9039"
+        },
+        "timezone": {
+          "offset": "+3:00",
+          "description": "Baghdad, Riyadh, Moscow, St. Petersburg"
+        }
       },
       "email": "nznyn.hmdy@example.com",
       "login": {
@@ -22,11 +35,20 @@
         "sha1": "e041933d2406f367210dc171edb12449b589811c",
         "sha256": "6dad625796adc30c89ba36922cb5fdecfacb7c2f82be5993ad2a21f065c2b850"
       },
-      "dob": { "date": "1991-06-15T20:35:29.963Z", "age": 35 },
-      "registered": { "date": "2003-02-16T11:37:22.782Z", "age": 23 },
+      "dob": {
+        "date": "1991-06-15T20:35:29.963Z",
+        "age": 35
+      },
+      "registered": {
+        "date": "2003-02-16T11:37:22.782Z",
+        "age": 23
+      },
       "phone": "083-94713520",
       "cell": "0969-286-8028",
-      "id": { "name": "", "value": null },
+      "id": {
+        "name": "",
+        "value": null
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/24.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/24.jpg",
@@ -36,15 +58,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Ms", "first": "Adriana", "last": "Villareal" },
+      "name": {
+        "title": "Ms",
+        "first": "Adriana",
+        "last": "Villareal"
+      },
       "location": {
-        "street": { "number": 1213, "name": "Callejón Sur Naranjo" },
+        "street": {
+          "number": 1213,
+          "name": "Callejón Sur Naranjo"
+        },
         "city": "La Fuente",
         "state": "Michoacan",
         "country": "Mexico",
         "postcode": 16371,
-        "coordinates": { "latitude": "9.4867", "longitude": "-90.9552" },
-        "timezone": { "offset": "+2:00", "description": "Kaliningrad, South Africa" }
+        "coordinates": {
+          "latitude": "9.4867",
+          "longitude": "-90.9552"
+        },
+        "timezone": {
+          "offset": "+2:00",
+          "description": "Kaliningrad, South Africa"
+        }
       },
       "email": "adriana.villareal@example.com",
       "login": {
@@ -56,11 +91,20 @@
         "sha1": "f87592453909a7a55582f39af5e7ffb54c096e17",
         "sha256": "61599bcd249f41f01cb8d932c79b9bb278be4278df96e3f364d62f6d13360d41"
       },
-      "dob": { "date": "1960-08-30T01:30:37.669Z", "age": 66 },
-      "registered": { "date": "2017-09-16T21:24:53.694Z", "age": 9 },
+      "dob": {
+        "date": "1960-08-30T01:30:37.669Z",
+        "age": 66
+      },
+      "registered": {
+        "date": "2017-09-16T21:24:53.694Z",
+        "age": 9
+      },
       "phone": "(613) 237 3727",
       "cell": "(604) 296 0615",
-      "id": { "name": "NSS", "value": "48 51 09 1148 8" },
+      "id": {
+        "name": "NSS",
+        "value": "48 51 09 1148 8"
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/66.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/66.jpg",
@@ -70,15 +114,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Mrs", "first": "Anica", "last": "Jovanović" },
+      "name": {
+        "title": "Mrs",
+        "first": "Anica",
+        "last": "Jovanović"
+      },
       "location": {
-        "street": { "number": 7580, "name": "Porodice Zarić" },
+        "street": {
+          "number": 7580,
+          "name": "Porodice Zarić"
+        },
         "city": "Aleksinac",
         "state": "Srem",
         "country": "Serbia",
         "postcode": 83069,
-        "coordinates": { "latitude": "-73.5980", "longitude": "52.4458" },
-        "timezone": { "offset": "-3:30", "description": "Newfoundland" }
+        "coordinates": {
+          "latitude": "-73.5980",
+          "longitude": "52.4458"
+        },
+        "timezone": {
+          "offset": "-3:30",
+          "description": "Newfoundland"
+        }
       },
       "email": "anica.jovanovic@example.com",
       "login": {
@@ -90,11 +147,20 @@
         "sha1": "467aa5c062ca5bdc4094b8d30a57b1041657d923",
         "sha256": "498879776eac6f6f273e9b32771404a4daee64b90a48b60d694309fd3ab02091"
       },
-      "dob": { "date": "2000-06-26T19:10:53.456Z", "age": 26 },
-      "registered": { "date": "2016-10-14T14:32:02.362Z", "age": 10 },
+      "dob": {
+        "date": "2000-06-26T19:10:53.456Z",
+        "age": 26
+      },
+      "registered": {
+        "date": "2016-10-14T14:32:02.362Z",
+        "age": 10
+      },
       "phone": "027-6702-556",
       "cell": "067-1610-831",
-      "id": { "name": "SID", "value": "409471041" },
+      "id": {
+        "name": "SID",
+        "value": "409471041"
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/21.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/21.jpg",
@@ -104,15 +170,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Ms", "first": "Galina", "last": "Kaganec" },
+      "name": {
+        "title": "Ms",
+        "first": "Galina",
+        "last": "Kaganec"
+      },
       "location": {
-        "street": { "number": 4442, "name": "Grebelna" },
+        "street": {
+          "number": 4442,
+          "name": "Grebelna"
+        },
         "city": "Novoazovsk",
         "state": "Hmelnicka",
         "country": "Ukraine",
         "postcode": 64685,
-        "coordinates": { "latitude": "55.5426", "longitude": "116.0486" },
-        "timezone": { "offset": "+7:00", "description": "Bangkok, Hanoi, Jakarta" }
+        "coordinates": {
+          "latitude": "55.5426",
+          "longitude": "116.0486"
+        },
+        "timezone": {
+          "offset": "+7:00",
+          "description": "Bangkok, Hanoi, Jakarta"
+        }
       },
       "email": "galina.kaganec@example.com",
       "login": {
@@ -124,11 +203,20 @@
         "sha1": "ff948b760a2f925c84bc72419dce89708232fe72",
         "sha256": "0fdcf4d87bb155d77504ae3cb8ebe269a4bdc331c080096824cc2ec2c94c1c4d"
       },
-      "dob": { "date": "1978-10-08T07:30:38.658Z", "age": 48 },
-      "registered": { "date": "2008-02-12T11:38:09.882Z", "age": 18 },
+      "dob": {
+        "date": "1978-10-08T07:30:38.658Z",
+        "age": 48
+      },
+      "registered": {
+        "date": "2008-02-12T11:38:09.882Z",
+        "age": 18
+      },
       "phone": "(097) X33-6258",
       "cell": "(068) N17-8029",
-      "id": { "name": "", "value": null },
+      "id": {
+        "name": "",
+        "value": null
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/37.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/37.jpg",
@@ -138,15 +226,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Ms", "first": "Melissa", "last": "Duarte" },
+      "name": {
+        "title": "Ms",
+        "first": "Melissa",
+        "last": "Duarte"
+      },
       "location": {
-        "street": { "number": 8925, "name": "Rua Boa Vista " },
+        "street": {
+          "number": 8925,
+          "name": "Rua Boa Vista "
+        },
         "city": "Ananindeua",
         "state": "Alagoas",
         "country": "Brazil",
         "postcode": 12852,
-        "coordinates": { "latitude": "5.4628", "longitude": "11.0075" },
-        "timezone": { "offset": "+5:30", "description": "Bombay, Calcutta, Madras, New Delhi" }
+        "coordinates": {
+          "latitude": "5.4628",
+          "longitude": "11.0075"
+        },
+        "timezone": {
+          "offset": "+5:30",
+          "description": "Bombay, Calcutta, Madras, New Delhi"
+        }
       },
       "email": "melissa.duarte@example.com",
       "login": {
@@ -158,11 +259,20 @@
         "sha1": "f13ed1bc9d2dbf3b4ebf121446547fd3103aff7c",
         "sha256": "185f4e3e44695ce87849e53fbc317f05ad9866c6fe52bdc069f6e395fa4ff157"
       },
-      "dob": { "date": "1946-09-05T17:06:32.736Z", "age": 80 },
-      "registered": { "date": "2008-01-11T05:50:24.150Z", "age": 18 },
+      "dob": {
+        "date": "1946-09-05T17:06:32.736Z",
+        "age": 80
+      },
+      "registered": {
+        "date": "2008-01-11T05:50:24.150Z",
+        "age": 18
+      },
       "phone": "(03) 5291-5433",
       "cell": "(81) 3786-5790",
-      "id": { "name": "CPF", "value": "022.771.047-73" },
+      "id": {
+        "name": "CPF",
+        "value": "022.771.047-73"
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/37.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/37.jpg",
@@ -172,15 +282,28 @@
     },
     {
       "gender": "male",
-      "name": { "title": "Mr", "first": "Davut", "last": "Yalçın" },
+      "name": {
+        "title": "Mr",
+        "first": "Davut",
+        "last": "Yalçın"
+      },
       "location": {
-        "street": { "number": 8687, "name": "Filistin Cd" },
+        "street": {
+          "number": 8687,
+          "name": "Filistin Cd"
+        },
         "city": "Karaman",
         "state": "Yalova",
         "country": "Turkey",
         "postcode": 29058,
-        "coordinates": { "latitude": "-50.8342", "longitude": "-163.5943" },
-        "timezone": { "offset": "-12:00", "description": "Eniwetok, Kwajalein" }
+        "coordinates": {
+          "latitude": "-50.8342",
+          "longitude": "-163.5943"
+        },
+        "timezone": {
+          "offset": "-12:00",
+          "description": "Eniwetok, Kwajalein"
+        }
       },
       "email": "davut.yalcin@example.com",
       "login": {
@@ -192,11 +315,20 @@
         "sha1": "8b907fb08963ee2b3857268a7ebcd77c8fab19aa",
         "sha256": "451ccb3a56b26e30a51c763bb941115f7b9e8f288c370386228ce12e7886cbcb"
       },
-      "dob": { "date": "1959-04-08T08:31:26.254Z", "age": 67 },
-      "registered": { "date": "2008-03-01T10:31:05.867Z", "age": 18 },
+      "dob": {
+        "date": "1959-04-08T08:31:26.254Z",
+        "age": 67
+      },
+      "registered": {
+        "date": "2008-03-01T10:31:05.867Z",
+        "age": 18
+      },
       "phone": "(879)-526-1337",
       "cell": "(918)-008-2550",
-      "id": { "name": "", "value": null },
+      "id": {
+        "name": "",
+        "value": null
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/men/85.jpg",
         "medium": "https://randomuser.me/api/portraits/med/men/85.jpg",
@@ -206,15 +338,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Miss", "first": "Oda", "last": "Merkel" },
+      "name": {
+        "title": "Miss",
+        "first": "Oda",
+        "last": "Merkel"
+      },
       "location": {
-        "street": { "number": 1220, "name": "Kastanienweg" },
+        "street": {
+          "number": 1220,
+          "name": "Kastanienweg"
+        },
         "city": "Ebeleben",
         "state": "Hessen",
         "country": "Germany",
         "postcode": 73734,
-        "coordinates": { "latitude": "36.3037", "longitude": "78.3888" },
-        "timezone": { "offset": "-2:00", "description": "Mid-Atlantic" }
+        "coordinates": {
+          "latitude": "36.3037",
+          "longitude": "78.3888"
+        },
+        "timezone": {
+          "offset": "-2:00",
+          "description": "Mid-Atlantic"
+        }
       },
       "email": "oda.merkel@example.com",
       "login": {
@@ -226,11 +371,20 @@
         "sha1": "5745f6c34e86e02f2577e5f299e02e615edb8241",
         "sha256": "e6574a02c6c61c8858937254a1e1ea2b9f23e144845f19077c34255f699cd0c6"
       },
-      "dob": { "date": "1990-08-06T07:58:00.489Z", "age": 36 },
-      "registered": { "date": "2005-03-19T15:53:14.593Z", "age": 21 },
+      "dob": {
+        "date": "1990-08-06T07:58:00.489Z",
+        "age": 36
+      },
+      "registered": {
+        "date": "2005-03-19T15:53:14.593Z",
+        "age": 21
+      },
       "phone": "0149-9425922",
       "cell": "0172-5064813",
-      "id": { "name": "SVNR", "value": "45 060890 M 609" },
+      "id": {
+        "name": "SVNR",
+        "value": "45 060890 M 609"
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/68.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/68.jpg",
@@ -240,15 +394,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Mrs", "first": "Joann", "last": "Crawford" },
+      "name": {
+        "title": "Mrs",
+        "first": "Joann",
+        "last": "Crawford"
+      },
       "location": {
-        "street": { "number": 6965, "name": "Ash Dr" },
+        "street": {
+          "number": 6965,
+          "name": "Ash Dr"
+        },
         "city": "Tamworth",
         "state": "Australian Capital Territory",
         "country": "Australia",
         "postcode": 1488,
-        "coordinates": { "latitude": "-60.6716", "longitude": "-51.9611" },
-        "timezone": { "offset": "-3:00", "description": "Brazil, Buenos Aires, Georgetown" }
+        "coordinates": {
+          "latitude": "-60.6716",
+          "longitude": "-51.9611"
+        },
+        "timezone": {
+          "offset": "-3:00",
+          "description": "Brazil, Buenos Aires, Georgetown"
+        }
       },
       "email": "joann.crawford@example.com",
       "login": {
@@ -260,11 +427,20 @@
         "sha1": "8d28cbb3b3651816637672c4ab6b967e6a5fdcf9",
         "sha256": "0b0a1f17b65c828babab4d76e2f1148d3c020013c80956935af9d559671d67db"
       },
-      "dob": { "date": "1958-10-17T17:31:04.403Z", "age": 68 },
-      "registered": { "date": "2015-10-06T22:16:43.443Z", "age": 11 },
+      "dob": {
+        "date": "1958-10-17T17:31:04.403Z",
+        "age": 68
+      },
+      "registered": {
+        "date": "2015-10-06T22:16:43.443Z",
+        "age": 11
+      },
       "phone": "05-8446-2983",
       "cell": "0451-346-951",
-      "id": { "name": "TFN", "value": "241895173" },
+      "id": {
+        "name": "TFN",
+        "value": "241895173"
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/71.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/71.jpg",
@@ -274,15 +450,28 @@
     },
     {
       "gender": "female",
-      "name": { "title": "Miss", "first": "Ellen", "last": "Ånestad" },
+      "name": {
+        "title": "Miss",
+        "first": "Ellen",
+        "last": "Ånestad"
+      },
       "location": {
-        "street": { "number": 3239, "name": "Kruttveien" },
+        "street": {
+          "number": 3239,
+          "name": "Kruttveien"
+        },
         "city": "Fagernes",
         "state": "Vestfold",
         "country": "Norway",
         "postcode": "3208",
-        "coordinates": { "latitude": "-51.0373", "longitude": "-9.8103" },
-        "timezone": { "offset": "-1:00", "description": "Azores, Cape Verde Islands" }
+        "coordinates": {
+          "latitude": "-51.0373",
+          "longitude": "-9.8103"
+        },
+        "timezone": {
+          "offset": "-1:00",
+          "description": "Azores, Cape Verde Islands"
+        }
       },
       "email": "ellen.anestad@example.com",
       "login": {
@@ -294,11 +483,20 @@
         "sha1": "6d2b4d92f7736fa708a22b2981fcc6b0ed53bf5c",
         "sha256": "d3f700583236d3e8091b53ae178c381bf712f50b3da1c53db4c6d3b04f447e9a"
       },
-      "dob": { "date": "1981-11-13T13:21:02.353Z", "age": 44 },
-      "registered": { "date": "2009-07-21T19:48:43.123Z", "age": 17 },
+      "dob": {
+        "date": "1981-11-13T13:21:02.353Z",
+        "age": 44
+      },
+      "registered": {
+        "date": "2009-07-21T19:48:43.123Z",
+        "age": 17
+      },
       "phone": "79247855",
       "cell": "92579829",
-      "id": { "name": "FN", "value": "13118149437" },
+      "id": {
+        "name": "FN",
+        "value": "13118149437"
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/20.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/20.jpg",
@@ -308,15 +506,28 @@
     },
     {
       "gender": "male",
-      "name": { "title": "Mr", "first": "Max", "last": "Clarke" },
+      "name": {
+        "title": "Mr",
+        "first": "Max",
+        "last": "Clarke"
+      },
       "location": {
-        "street": { "number": 8951, "name": "Main Street West" },
+        "street": {
+          "number": 8951,
+          "name": "Main Street West"
+        },
         "city": "Taupo",
         "state": "Manawatu-Wanganui",
         "country": "New Zealand",
         "postcode": 62555,
-        "coordinates": { "latitude": "35.8644", "longitude": "98.1077" },
-        "timezone": { "offset": "-6:00", "description": "Central Time (US & Canada), Mexico City" }
+        "coordinates": {
+          "latitude": "35.8644",
+          "longitude": "98.1077"
+        },
+        "timezone": {
+          "offset": "-6:00",
+          "description": "Central Time (US & Canada), Mexico City"
+        }
       },
       "email": "max.clarke@example.com",
       "login": {
@@ -328,18 +539,54 @@
         "sha1": "60140c02c471cf5028b76380fa29a6109441cd51",
         "sha256": "3ee3d6e74ec25efa775e9a4c5a9174fb1cc9b2c4410f462bc7f2d191060dfe49"
       },
-      "dob": { "date": "2000-10-09T21:24:23.978Z", "age": 26 },
-      "registered": { "date": "2012-09-16T23:38:22.497Z", "age": 14 },
+      "dob": {
+        "date": "2000-10-09T21:24:23.978Z",
+        "age": 26
+      },
+      "registered": {
+        "date": "2012-09-16T23:38:22.497Z",
+        "age": 14
+      },
       "phone": "(182)-077-3162",
       "cell": "(479)-352-2058",
-      "id": { "name": "", "value": null },
+      "id": {
+        "name": "",
+        "value": null
+      },
       "picture": {
         "large": "https://randomuser.me/api/portraits/men/29.jpg",
         "medium": "https://randomuser.me/api/portraits/med/men/29.jpg",
         "thumbnail": "https://randomuser.me/api/portraits/thumb/men/29.jpg"
       },
       "nat": "NZ"
+    },
+    {
+      "email": "galamogalgamo@gmail.com",
+      "name": {
+        "first": "gal",
+        "last": "gal"
+      },
+      "login": {
+        "username": "galamo",
+        "password": "HASHED_PASS"
+      }
+    },
+    {
+      "email": "almogdev@gmail.com",
+      "name": {
+        "first": "almog",
+        "last": "almog"
+      },
+      "login": {
+        "username": "almog",
+        "password": "HASHED_PASS"
+      }
     }
   ],
-  "info": { "seed": "d90b33b19e5e46fc", "results": 10, "page": 1, "version": "1.4" }
+  "info": {
+    "seed": "d90b33b19e5e46fc",
+    "results": 10,
+    "page": 1,
+    "version": "1.4"
+  }
 }

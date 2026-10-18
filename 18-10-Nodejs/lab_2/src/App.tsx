@@ -9,6 +9,7 @@ import { store } from './store/store'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const LoginPageState = lazy(() => import('./pages/LoginPageState'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage'))
 const LoginPageRef = lazy(() => import('./pages/LoginPageRef'))
 const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 const ReportsPage = lazy(() => import('./pages/ReportsPage'))
@@ -40,6 +41,7 @@ export default function App() {
                 <Route element={<SuspenseRoute />}>
                   <Route index element={<HomePage />} />
                   <Route path="login-state" element={<LoginPageState />} />
+                  <Route path="register" element={<RegisterPage />} />
                   {/* <Route path="login-ref" element={<LoginPageRef />} /> */}
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="reports" element={<ReportsPage />} />

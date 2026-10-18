@@ -6,6 +6,21 @@ export type LoginCredentials = {
   password: string
 }
 
+export type RegisterInput = {
+  username: string
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+}
+
+export type RegisteredUser = {
+  username: string
+  email: string
+  firstName: string
+  lastName: string
+}
+
 export type AuthUser = {
   username: string
   email: string
@@ -22,22 +37,35 @@ export type AuthState = {
   user: AuthUser | null
   status: AuthStatus
   error: string
+  registerStatus: AuthStatus
+  registerError: string
+  registerMessage: string
 }
 
 const LOGIN_URL = "http://localhost:3000/auth/login"
+const REGISTER_URL = "http://localhost:3000/auth/register"
 
 const initialState: AuthState = {
   user: null,
   status: "idle",
   error: "",
+  registerStatus: "idle",
+  registerError: "",
+  registerMessage: "",
 }
 
 type LoginResponse = {
   message: string
   user: AuthUser
+  token: string
 }
 
-function toErrorMessage(err: unknown) {
+type RegisterResponse = {
+  message: string
+  user: RegisteredUser
+}
+
+function toErrorMessage(err: unknown, fallback: string) {
   if (axios.isAxiosError(err)) {
     const data = err.response?.data
     if (
@@ -57,7 +85,7 @@ function toErrorMessage(err: unknown) {
     return err.message
   }
 
-  return "Login failed"
+  return fallback
 }
 
 export const login = createAsyncThunk<AuthUser, LoginCredentials, { rejectValue: string }>(
@@ -65,9 +93,22 @@ export const login = createAsyncThunk<AuthUser, LoginCredentials, { rejectValue:
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post<LoginResponse>(LOGIN_URL, credentials)
+      localStorage.setItem("token", data.token)
       return data.user
     } catch (err) {
-      return rejectWithValue(toErrorMessage(err))
+      return rejectWithValue(toErrorMessage(err, "Login failed"))
+    }
+  },
+)
+
+export const register = createAsyncThunk<RegisterResponse, RegisterInput, { rejectValue: string }>(
+  "auth/register",
+  async (input, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post<RegisterResponse>(REGISTER_URL, input)
+      return data
+    } catch (err) {
+      return rejectWithValue(toErrorMessage(err, "Registration failed"))
     }
   },
 )
@@ -82,12 +123,20 @@ const authSlice = createSlice({
         state.status = "idle"
       }
     },
+    clearRegisterError(state) {
+      state.registerError = ""
+      if (state.registerStatus === "failed") {
+        state.registerStatus = "idle"
+      }
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(login.pending, (state) => {
         state.status = "pending"
         state.error = ""
+        state.registerMessage = ""
+        state.registerStatus = state.registerStatus === "succeeded" ? "idle" : state.registerStatus
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = "succeeded"
@@ -100,8 +149,23 @@ const authSlice = createSlice({
         state.user = null
         state.error = action.payload ?? action.error.message ?? "Login failed"
       })
+      .addCase(register.pending, (state) => {
+        state.registerStatus = "pending"
+        state.registerError = ""
+        state.registerMessage = ""
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.registerStatus = "succeeded"
+        state.registerMessage = action.payload.message
+        state.registerError = ""
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.registerStatus = "failed"
+        state.registerMessage = ""
+        state.registerError = action.payload ?? action.error.message ?? "Registration failed"
+      })
   },
 })
 
-export const { clearLoginError } = authSlice.actions
+export const { clearLoginError, clearRegisterError } = authSlice.actions
 export const authReducer = authSlice.reducer
