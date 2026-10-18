@@ -674,5 +674,5 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 
 ## Ex 1
 
-- Support new Entry point - /GET email-exist?username=gal
+- Support new Entry point - /GET email-exist?email=gal
 - The response will return true if the user exist or false if not
