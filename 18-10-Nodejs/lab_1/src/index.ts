@@ -3,6 +3,7 @@ import express, { type ErrorRequestHandler, type RequestHandler } from "express"
 import { v4 as uuidv4 } from "uuid";
 import {  logRequestDuration, logRequestRecieved } from "./middleware.js";
 import authRouter from "./routes/login/index.js"
+import cors from "cors";
 config();
 
 const port = process.env.PORT;
@@ -16,21 +17,13 @@ const assignRequestId: RequestHandler = (_req, res, next) => {
   res.setHeader("x-powered-by", "");
   next();
 };
-
+app.use(cors()) //enable all origins 
 app.use(assignRequestId);
 app.use(logRequestRecieved);
 app.use(logRequestDuration);
 app.use(express.json());
 
 app.use("/auth", authRouter)
-app.get("/users", (_req, res) => {
-  res.status(200).send("users!!!");
-});
-
-app.get("/do-something", (_req, res) => {
-  res.status(200).send("some api entry point");
-});
-
 app.get("/", (_req, res) => {
   res.status(200).send("Hello World");
 });
