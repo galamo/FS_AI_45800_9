@@ -669,3 +669,10 @@ balance:1000,
 currency: "ILS"
 owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"bc", role:"view"}]
 }
+
+# 18-10
+
+## Ex 1
+
+- Support new Entry point - /GET email-exist?username=gal
+- The response will return true if the user exist or false if not
