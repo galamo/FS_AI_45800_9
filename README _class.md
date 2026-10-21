@@ -12,11 +12,10 @@ This assignment covers listing, filtering, and viewing products. Creating, editi
 
 Reference URL:
 
-https://apis.io/api/v1/examples/products-api-product-list-response-example
-
+https://fakestoreapi.com/products
 Readable example:
 
-https://apis.io/examples/best-buy/products-api-product-list-response-example/
+https://fakestoreapi.com/products
 
 **Source limitation:** When checked on October 21, 2026, the readable example contained `products: ["sample-value"]`, rather than product objects. The API URL also returned catalog metadata during verification. Do not treat catalog entries as products or assume the source supports product filters.
 
