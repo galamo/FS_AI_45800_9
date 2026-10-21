@@ -1,7 +1,7 @@
 import type { RequestHandler } from "express";
 import { readUsers } from "../../../data/users.js";
 import { v4 as uuidv4 } from "uuid";
-const tokensObj: Record<string, {date: Date, user:string}> = {}; // will be replaced with a database
+export const tokensObj: Record<string, {date: Date, user:string}> = {}; // will be replaced with a database
 
 export const login: RequestHandler = async (req, res) => {
   console.log("login request received!!!!!!");

@@ -2,13 +2,15 @@ import { Router, type ErrorRequestHandler } from "express";
 import { filterProducts, listFilterOptions } from "../../products/filterProducts.js";
 import { parseProductId, parseProductQuery } from "../../products/parseProductQuery.js";
 import type { Product } from "../../products/product.js";
+import { tokensObj } from "../login/handlers/login.js"; // statefull - save the token inside object 
+// - jwt will be used as stateless authentcation token 
 
 export function createProductsRouter(products: readonly Product[]) {
   const router = Router();
  router.use((req, res, next)=>{
   const token = req.headers.authorization;
-  
-  if(!token){
+
+  if(!token || !tokensObj[token]){
     res.status(401).json({
       error: {
         code: "UNAUTHORIZED",

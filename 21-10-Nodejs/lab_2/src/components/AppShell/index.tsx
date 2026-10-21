@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
@@ -12,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import LogoutIcon from '@mui/icons-material/Logout'
 import MenuIcon from '@mui/icons-material/Menu'
 import RouteErrorBoundary from '../ErrorBoundary'
 import { navItems } from '../../navigation'
@@ -67,6 +69,7 @@ function NavigationList({ onNavigate }: NavigationListProps) {
 export default function AppShell() {
 
   const [mobileOpen, setMobileOpen] = useState(false)
+  const navigate = useNavigate()
   const { pathname } = useLocation()
   const current = [...navItems]
     .sort((a, b) => b.to.length - a.to.length)
@@ -85,6 +88,11 @@ export default function AppShell() {
 
   const toggleMobileDrawer = () => {
     setMobileOpen((open) => !open)
+  }
+
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate('/login-state')
   }
 
   return (
@@ -106,9 +114,12 @@ export default function AppShell() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="h1" noWrap>
+          <Typography variant="h6" component="h1" noWrap sx={{ flexGrow: 1 }}>
             {title}
           </Typography>
+          <Button color="inherit" startIcon={<LogoutIcon />} onClick={handleLogout}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
