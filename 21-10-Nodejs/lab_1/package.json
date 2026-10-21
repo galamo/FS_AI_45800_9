@@ -6,7 +6,8 @@
   "scripts": {
     "start": "tsx watch ./src/index.ts",
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/products/filterProducts.test.ts"
   },
   "keywords": [],
   "author": "",

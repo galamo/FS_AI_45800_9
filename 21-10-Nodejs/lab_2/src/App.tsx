@@ -20,6 +20,8 @@ const DogsLayout = lazy(() => import('./pages/DogsPage/DogsLayout'))
 const DogsPage = lazy(() => import('./pages/DogsPage'))
 const DogsReportsPage = lazy(() => import('./pages/DogsPage/DogsReportsPage'))
 const SettingsPage = lazy(() => import('./pages/SettingsPage'))
+const ProductsPage = lazy(() => import('./pages/ProductsPage'))
+const ProductDetailsPage = lazy(() => import('./pages/ProductsPage/ProductDetailsPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function SuspenseRoute() {
@@ -53,6 +55,8 @@ export default function App() {
                     <Route path="reports" element={<DogsReportsPage />} />
                   </Route>
                   <Route path="settings" element={<SettingsPage />} />
+                  <Route path="products" element={<ProductsPage />} />
+                  <Route path="products/:id" element={<ProductDetailsPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Route>
               </Route>

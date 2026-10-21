@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import {  logRequestDuration, logRequestRecieved } from "./middleware.js";
 import authRouter from "./routes/login/index.js"
 import cors from "cors";
+import { inspectExternalCatalog, loadProductCatalog } from "./products/catalog.js";
+import { createProductsRouter } from "./routes/products/index.js";
 config();
 
 const port = process.env.PORT;
@@ -35,8 +37,19 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   res.status(500).send(`Something broke! ReqId:${requestId}`);
 };
 
-app.use(errorHandler);
+async function start() {
+  const products = await loadProductCatalog();
+  const observation = await inspectExternalCatalog();
+  console.log(observation);
+  app.use("/api/products", createProductsRouter(products));
+  app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
+
+start().catch((error: unknown) => {
+  console.error(error);
+  process.exit(1);
 });

@@ -27,15 +27,7 @@ Start by inspecting the response from the reference URL on the server. Identify 
 - Keep identifiers unique and prices non-negative. Use one currency: USD.
 - Clearly document whether your server uses the external data or the fallback fixture. If usable external data becomes available, document its mapping to the same model.
 
-| Field | Type | Meaning |
-| --- | --- | --- |
-| id | string | Unique product identifier |
-| name | string | Product name |
-| description | string | Short description |
-| category | string | Category name |
-| brand | string | Brand name |
-| price | number | Price in USD |
-| inStock | boolean | Availability |
+
 
 The React client must request all product data through your Node.js API. Do not import the fixture into React or fetch the external source directly from the browser. Load and validate the dataset on the server before serving product requests; avoid fetching the external source for every filter change. Never silently convert an invalid upstream response into a successful empty list.
 
@@ -130,19 +122,4 @@ Record the request or action, expected result, and actual result for each scenar
 - [ ] Stopping the server produces a visible client error state.
 
 Manual verification is required. Automated tests for filter combinations and input validation are encouraged.
-
-## 5. Independent work — no AI assistance
-
-Complete the implementation and submission explanations yourself. Do not use generative AI to produce, complete, rewrite, debug, or explain your assignment code. This includes chat assistants, AI code completion, and coding agents. Disable AI features in your editor while working on this assignment.
-
-Allowed resources: course materials, official documentation, ordinary non-AI search results, and questions to the instructor. Standard syntax completion and framework scaffolding are allowed. Do not copy a complete implementation from another student or an online project. Cite any small adapted snippets and explain them in your own words.
-
-Evidence of your work:
-
-1. Maintain meaningful Git commits throughout development, covering the API, filtering, client routes, and integration. Do not fabricate or backdate history.
-2. Keep a short development log describing decisions, bugs encountered, and how you investigated them.
-3. Attend a 5–10 minute individual demonstration. Be prepared to trace a filter from the React input through the HTTP request to the server response, explain your code, and make a small instructor-selected change without AI assistance.
-4. Include this declaration only if accurate: **“I completed this assignment without generative AI assistance. I have listed the external resources and adapted snippets I used.”**
-
-Assessment considers the submitted work, development evidence, and demonstrated understanding. An automated AI-detector score alone is not evidence of misconduct. Suspected unauthorized assistance will be handled under the course's academic integrity rules.
 
