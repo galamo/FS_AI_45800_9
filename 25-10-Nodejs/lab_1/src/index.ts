@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import express, { type ErrorRequestHandler, type RequestHandler } from "express";
 import { v4 as uuidv4 } from "uuid";
-import {  logRequestDuration, logRequestRecieved } from "./middleware.js";
+import { logRequestDuration, logRequestRecieved, verifyLogin } from "./middleware.js";
 import authRouter from "./routes/login/index.js"
 import cors from "cors";
 import { inspectExternalCatalog, loadProductCatalog } from "./products/catalog.js";
@@ -29,6 +29,11 @@ app.use("/auth", authRouter)
 app.get("/", (_req, res) => {
   res.status(200).send("Hello World");
 });
+
+
+
+app.use(verifyLogin);
+
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   const requestId = res.getHeader("x-request-id");

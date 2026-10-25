@@ -720,3 +720,7 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 ### Ex_1
 
 1. Support Veryfing the JWT token in all application except then the login/register and healthcheck
+
+### Ex_2 - protect the JokesAPI
+1. Entry point jokes - call the external api  GET /jokes 
+2. Client Call New entry point 

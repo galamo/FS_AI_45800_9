@@ -16,10 +16,8 @@ export const signLoginToken = (username: string): string =>
 
 export const verifyLoginToken = (token: string): boolean => {
   try {
-    jwt.verify(token, readSecret(),(_, decodedClaims)=>{
-     console.log(decodedClaims);
-    });
-    
+    const decodedClaims = jwt.verify(token, readSecret());
+    console.log(decodedClaims);
     return true;
   } catch {
     return false;

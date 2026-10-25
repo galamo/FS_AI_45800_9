@@ -2,25 +2,9 @@ import { Router, type ErrorRequestHandler } from "express";
 import { filterProducts, listFilterOptions } from "../../products/filterProducts.js";
 import { parseProductId, parseProductQuery } from "../../products/parseProductQuery.js";
 import type { Product } from "../../products/product.js";
-import { verifyLoginToken } from "../../auth/token.js";
 
 export function createProductsRouter(products: readonly Product[]) {
   const router = Router();
- router.use((req, res, next)=>{
-  const header = req.headers.authorization;
-  const token = header?.startsWith("Bearer ") ? header.slice("Bearer ".length) : header;
-
-  if(!token || !verifyLoginToken(token)){
-    res.status(401).json({
-      error: {
-        code: "UNAUTHORIZED",
-        message: "Unauthorized",
-      },
-    });
-    return;
-  }
-  next();
- })
 
   router.get("/", (req, res) => {
     const parsed = parseProductQuery(req.query as Record<string, unknown>);
