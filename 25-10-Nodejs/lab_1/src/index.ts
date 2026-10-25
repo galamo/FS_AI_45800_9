@@ -7,12 +7,13 @@ import cors from "cors";
 import { inspectExternalCatalog, loadProductCatalog } from "./products/catalog.js";
 import { createJokesRouter } from "./routes/jokes/index.js";
 import { createProductsRouter } from "./routes/products/index.js";
+import { logger } from "./logger.js";
 config();
 
 const port = process.env.PORT;
 const app = express();
 
-console.log("Starting Nodejs Server API");
+logger.info("Starting Nodejs Server API1!!!!!!!!!!");
 
 const assignRequestId: RequestHandler = (_req, res, next) => {
   const requestId = uuidv4();
@@ -39,7 +40,7 @@ app.use(verifyLogin);
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   const requestId = res.getHeader("x-request-id");
   const stack = err instanceof Error ? err.stack : String(err);
-  console.error(`${stack} ReqId:${requestId}`);
+  logger.error(`${stack} `,requestId);
   res.status(500).send(`Something broke! ReqId:${requestId}`);
 };
 

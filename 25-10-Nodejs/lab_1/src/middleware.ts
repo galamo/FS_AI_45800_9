@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import { verifyLoginToken } from "./auth/token.js";
+import { logger } from "./logger.js";
 
 const publicPaths = new Set(["/auth/login", "/auth/register", "/auth/healthcheck"]);
 
@@ -13,8 +14,18 @@ export const verifyLogin: RequestHandler = (req, res, next) => {
 
   const header = req.headers.authorization;
   const token = header?.startsWith("Bearer ") ? header.slice("Bearer ".length) : header;
-
-  if (!token || !verifyLoginToken(token)) {
+  if(!token){
+    logger.error("Unauthorized - no token", res.getHeader("x-request-id"));
+    res.status(401).json({
+      error: {
+        code: "UNAUTHORIZED",
+        message: "Unauthorized - no token",
+      },
+    });
+    return;
+  }
+  if (!verifyLoginToken(token)) {
+    logger.error("Unauthorized-token not valid", res.getHeader("x-request-id"));
     res.status(401).json({
       error: {
         code: "UNAUTHORIZED",
