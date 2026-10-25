@@ -1,7 +1,6 @@
 import type { RequestHandler } from "express";
+import { signLoginToken } from "../../../auth/token.js";
 import { readUsers } from "../../../data/users.js";
-import { v4 as uuidv4 } from "uuid";
-export const tokensObj: Record<string, {date: Date, user:string}> = {}; // will be replaced with a database
 
 export const login: RequestHandler = async (req, res) => {
   console.log("login request received!!!!!!");
@@ -26,10 +25,7 @@ export const login: RequestHandler = async (req, res) => {
     return;
   }
  
-  const currentToken = uuidv4();
-  tokensObj[currentToken] = {date: new Date(), user: user.login.username};
-  // clear the prev user tokens 
-  console.log(tokensObj);
+  const token = signLoginToken(user.login.username);
   res.status(200).json({
     message: "Login successful",
     user: {
@@ -37,6 +33,6 @@ export const login: RequestHandler = async (req, res) => {
       email: user.email,
       name: user.name,
     },
-    token: currentToken,
+    token,
   });
 };

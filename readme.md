@@ -680,3 +680,40 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 # Ex 2
 
 - implement register flow with the client side
+
+# 25-10
+
+### Client side - React
+
+#### Communicate with Server (Api - nodejs express api)
+
+1. Component => dispatch(redux) => async function => axios => server
+2. Component => Hook => useEffect => async function => axios => server
+3. React Query - tanstack ?
+
+#### Save data in state
+
+1. Global state - redux
+2. Local state - useState
+
+#### middleware in client
+
+- Axios.interceptor
+- Redux middleware
+
+### Server side - Node.js (express api)
+
+1. Express
+2. listen port - choose port
+3. env variables .env
+4. error handler - middleware error
+5. Seperated Router - define entrypoints , Get/Post/Delete...
+6. Handlers - Business logic
+7. Middlware - many middlewares! app.use => custom - addRequestId, and 3party - cors
+8. Authorization, Authentication ( token, expiration, jwt...)
+9. Filesystem communication
+10. Input validation
+11. Logs! console, we will use logs file !
+
+
+*** DB communication ***
