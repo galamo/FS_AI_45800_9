@@ -715,5 +715,8 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 10. Input validation
 11. Logs! console, we will use logs file !
 
+**_ DB communication _**
 
-*** DB communication ***
+### Ex_1
+
+1. Support Veryfing the JWT token in all application except then the login/register and healthcheck
