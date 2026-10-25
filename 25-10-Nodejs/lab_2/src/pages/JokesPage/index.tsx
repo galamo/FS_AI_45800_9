@@ -2,8 +2,9 @@ import { useEffect } from "react"
 import ErrorMessage from "../../components/ErrorMessage"
 import Spinner from "../../components/Spinner"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { clearJokesError, loadJokes, setNumberOfJokes } from "../../store/jokesReducer"
+import { clearJokes, clearJokesError, loadJokes, setNumberOfJokes } from "../../store/jokesReducer"
 import "./jokes-page.css"
+import { Navigate, UNSAFE_SingleFetchRedirectSymbol } from "react-router-dom"
 
 export default function JokesPage() {
   const dispatch = useAppDispatch()
@@ -13,8 +14,13 @@ export default function JokesPage() {
   useEffect(() => {
     if(jokes.length > 0) return;
     dispatch(loadJokes())
-  }, [dispatch])
 
+    return () => {
+      dispatch(clearJokes())
+    }
+  }, [dispatch])
+  
+  if(status === "failed") return <Navigate to="/login-state" /> // check in each component/page 
   return (
     <section className="jokes-page" aria-busy={isPending}>
       <header className="jokes-page__header">

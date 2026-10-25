@@ -3,7 +3,9 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 import AppShell from './components/AppShell'
 import RouteErrorBoundary from './components/ErrorBoundary'
+import RequireAuth from './components/RequireAuth'
 import Spinner from './components/Spinner'
+import withAuth from './components/withAuth'
 import { AppProvider } from './context/AppContext'
 import { store } from './store/store'
 
@@ -23,6 +25,9 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage'))
 const ProductsPage = lazy(() => import('./pages/ProductsPage'))
 const ProductDetailsPage = lazy(() => import('./pages/ProductsPage/ProductDetailsPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+
+const ProtectedDashboard = withAuth(DashboardPage)
+const ProtectedFavoritePage = withAuth(FavoritesPage)
 
 function SuspenseRoute() {
   return (
@@ -45,11 +50,14 @@ export default function App() {
                   <Route path="login-state" element={<LoginPageState />} />
                   <Route path="register" element={<RegisterPage />} />
                   {/* <Route path="login-ref" element={<LoginPageRef />} /> */}
-                  <Route path="dashboard" element={<DashboardPage />} />
-                  <Route path="reports" element={<ReportsPage />} />
+                  <Route path="dashboard" element={<ProtectedDashboard />} />
+                  <Route element={<RequireAuth />}>
+                    <Route path="reports" element={<ReportsPage />} />
+                    <Route path="jokes" element={<JokesPage />} />
+                  </Route>
                   <Route path="users" element={<UsersPage />} />
-                  <Route path="favorites" element={<FavoritesPage />} />
-                  <Route path="jokes" element={<JokesPage />} />
+                  <Route path="favorites" element={<ProtectedFavoritePage />} />
+                 
                   <Route path="dogs" element={<DogsLayout />}>
                     <Route index element={<DogsPage />} />
                     <Route path="reports" element={<DogsReportsPage />} />

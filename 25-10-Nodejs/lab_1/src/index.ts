@@ -5,6 +5,7 @@ import { logRequestDuration, logRequestRecieved, verifyLogin } from "./middlewar
 import authRouter from "./routes/login/index.js"
 import cors from "cors";
 import { inspectExternalCatalog, loadProductCatalog } from "./products/catalog.js";
+import { createJokesRouter } from "./routes/jokes/index.js";
 import { createProductsRouter } from "./routes/products/index.js";
 config();
 
@@ -47,6 +48,7 @@ async function start() {
   const observation = await inspectExternalCatalog();
   console.log(observation);
   app.use("/api/products", createProductsRouter(products));
+  app.use("/api/jokes", createJokesRouter());
   app.use(errorHandler);
 
   app.listen(port, () => {

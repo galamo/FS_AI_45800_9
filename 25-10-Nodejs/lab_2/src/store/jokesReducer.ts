@@ -54,6 +54,11 @@ const jokesSlice = createSlice({
     setNumberOfJokes(state, action: PayloadAction<number>) {
       state.numberOfJokes = action.payload
     },
+    clearJokes(state){
+      state.jokes = []
+      state.status = "idle"
+      state.error = ""
+    }
   },
   extraReducers(builder) {
     builder
@@ -74,5 +79,5 @@ const jokesSlice = createSlice({
   },
 })
 
-export const { clearJokesError, setNumberOfJokes } = jokesSlice.actions
+export const { clearJokesError, setNumberOfJokes , clearJokes} = jokesSlice.actions
 export const jokesReducer = jokesSlice.reducer
