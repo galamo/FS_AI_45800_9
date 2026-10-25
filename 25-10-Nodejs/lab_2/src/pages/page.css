@@ -1,0 +1,11 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+}
+
+.page__lead {
+  margin: 0;
+  line-height: 1.5;
+}

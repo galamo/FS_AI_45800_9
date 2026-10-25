@@ -1,0 +1,54 @@
+@import "leaflet/dist/leaflet.css";
+
+.users-map {
+  margin-bottom: 24px;
+}
+
+.users-map__canvas {
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--social-bg);
+}
+
+.users-map__avatar {
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  object-fit: cover;
+  background: #fff;
+}
+
+.users-map__popup-image {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.users-map__popup-name {
+  margin: 0;
+  font-weight: 600;
+  color: #08060d;
+  text-align: center;
+}
+
+.users-map__popup-place {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #6b6375;
+  text-align: center;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+  text-align: center;
+}
+
+.leaflet-popup-content p {
+  margin: 0;
+}
