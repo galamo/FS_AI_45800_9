@@ -734,6 +734,19 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 2. Support changing the TTL for user jwt login only for admin ( hints: client configuration page, server side new entrypoint )
 
 
+## Homework
 # Ex 2 
 1. Write into logs every console.log and scan every file to add more logs into the logger
+
+
+
+# Task 2 content
+1. React
+2. UI - Table, cards
+3. Communicate with API using axios
+4. State maangement
+5. Error handling 
+6. Routing between pages in react
+
+
 
