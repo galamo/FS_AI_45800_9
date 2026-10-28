@@ -39,8 +39,8 @@ export default function ProductTable(props: ProductTableProps) {
               <td>{formatPrice(product.price)}</td>
               <td>{formatAvailability(product.inStock)}</td>
               <td>
-                {/* Only Admin can perform this? Disable/Disapear from ui  */}
-                <Button
+              <CanIUse canIUse={true}>
+              <Button
                   variant="outlined"
                   color="error"
                   size="small"
@@ -49,6 +49,8 @@ export default function ProductTable(props: ProductTableProps) {
                 >
                   Delete
                 </Button>
+              </CanIUse>
+                
               </td>
             </tr>
           ))}
@@ -56,4 +58,14 @@ export default function ProductTable(props: ProductTableProps) {
       </table>
     </div>
   )
+}
+
+
+function CanIUse(props: {children: React.ReactNode, canIUse: boolean}){
+  // connect to redux and pull user permissions 
+  const {children, canIUse} = props
+  if(canIUse){
+    return children
+  }
+  return null
 }

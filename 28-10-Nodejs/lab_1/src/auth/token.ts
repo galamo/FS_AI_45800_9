@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import type { UserRecord } from "../data/users.js";
 import { readTokenTtlMinutes } from "./tokenConfig.js";
 
+
+
 const readSecret = (): string => {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
