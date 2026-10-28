@@ -1,0 +1,10 @@
+{
+  "name": "25-10-nodejs",
+  "private": true,
+  "scripts": {
+    "all": "concurrently --names Api,Client --prefix-colors red,blue \"npm start --prefix lab_1\" \"npm run dev --prefix lab_2\""
+  },
+  "dependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
