@@ -732,3 +732,8 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 
 1. Support deleting product only for admin
 2. Support changing the TTL for user jwt login only for admin ( hints: client configuration page, server side new entrypoint )
+
+
+# Ex 2 
+1. Write into logs every console.log and scan every file to add more logs into the logger
+

@@ -1,81 +1,11 @@
 [
   {
-    "id": "neb-earbuds",
-    "name": "Wireless Trail Earbuds",
-    "description": "Sweat-resistant earbuds for runs and commuting.",
-    "category": "Audio",
-    "brand": "Northbeam",
-    "price": 49,
-    "currency": "USD",
-    "inStock": true
-  },
-  {
-    "id": "neb-headphones",
-    "name": "Studio Headphones",
-    "description": "Closed over-ear headphones for desks and travel.",
-    "category": "Audio",
-    "brand": "Northbeam",
-    "price": 150,
-    "currency": "USD",
-    "inStock": true
-  },
-  {
-    "id": "har-radio",
-    "name": "Pocket Radio",
-    "description": "A compact shelf radio. The dock uses a wireless charger.",
-    "category": "Audio",
-    "brand": "Harbor & Co",
-    "price": 20,
-    "currency": "USD",
-    "inStock": false
-  },
-  {
-    "id": "har-tote",
-    "name": "Canvas Field Tote",
-    "description": "Heavy canvas tote with an interior pocket for a notebook.",
-    "category": "Accessories",
-    "brand": "Harbor & Co",
-    "price": 35,
-    "currency": "USD",
-    "inStock": true
-  },
-  {
-    "id": "lum-sleeve",
-    "name": "Leather Card Sleeve",
-    "description": "Slim sleeve that holds four cards and a folded note.",
-    "category": "Accessories",
-    "brand": "Lumen",
-    "price": 18,
-    "currency": "USD",
-    "inStock": true
-  },
-  {
-    "id": "lum-scarf",
-    "name": "Merino Travel Scarf",
-    "description": "Light merino scarf that packs into its own pocket.",
-    "category": "Accessories",
-    "brand": "Lumen",
-    "price": 42,
-    "currency": "USD",
-    "inStock": false
-  },
-  {
     "id": "lum-kettle",
     "name": "Ceramic Pour-Over Kettle",
     "description": "Gooseneck kettle for slow pour-over coffee.",
     "category": "Home",
     "brand": "Lumen",
     "price": 64,
-    "currency": "USD",
-    "inStock": true
-  },
-  {
-    "id": "har-runner",
-    "name": "Linen Table Runner",
-    "description": "Stonewashed linen runner for a six-seat table.",
-    "category": "Home",
-    "brand": "Harbor & Co",
-    "price": 28,
     "currency": "USD",
     "inStock": true
   },

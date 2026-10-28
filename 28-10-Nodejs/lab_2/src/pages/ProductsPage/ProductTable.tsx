@@ -1,14 +1,17 @@
 import { Link as RouterLink } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import Link from '@mui/material/Link'
 import { formatAvailability, formatPrice } from './format-price'
 import type { Product } from './product-type'
 
 type ProductTableProps = {
   products: Product[]
+  deletingId: string | null
+  onDelete: (id: string) => void
 }
 
 export default function ProductTable(props: ProductTableProps) {
-  const { products } = props
+  const { products, deletingId, onDelete } = props
 
   return (
     <div className="products-table-wrap">
@@ -20,6 +23,7 @@ export default function ProductTable(props: ProductTableProps) {
             <th scope="col">Brand</th>
             <th scope="col">Price</th>
             <th scope="col">Availability</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +38,18 @@ export default function ProductTable(props: ProductTableProps) {
               <td>{product.brand}</td>
               <td>{formatPrice(product.price)}</td>
               <td>{formatAvailability(product.inStock)}</td>
+              <td>
+                {/* Only Admin can perform this? Disable/Disapear from ui  */}
+                <Button
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                  disabled={deletingId === product.id}
+                  onClick={() => onDelete(product.id)}
+                >
+                  Delete
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -11,7 +11,7 @@ export const productSchema = z.object({
   inStock: z.boolean(),
 });
 
-export const catalogSchema = z.array(productSchema).min(12).superRefine((products, context) => {
+export const catalogSchema = z.array(productSchema).superRefine((products, context) => {
   const seen = new Set<string>();
 
   for (const [index, product] of products.entries()) {

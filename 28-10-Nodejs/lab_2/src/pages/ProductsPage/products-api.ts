@@ -79,6 +79,17 @@ export async function getProductFilters() {
   }
 }
 
+export async function deleteProduct(id: string) {
+  try {
+    const { data } = await axiosInstance.delete<{ message: string }>(
+      `${apiBaseUrl}/api/products/${encodeURIComponent(id)}`,
+    )
+    return data
+  } catch (error) {
+    throw toRequestError(error)
+  }
+}
+
 export async function getProduct(id: string) {
   try {
     const { data } = await axiosInstance.get<{ product: Product }>(

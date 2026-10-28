@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { catalogSchema, type Product } from "./product.js";
 
 const fixtureUrl = new URL("./products.json", import.meta.url);
@@ -20,6 +20,30 @@ export async function loadProductCatalog(): Promise<Product[]> {
   }
 
   return result.data;
+}
+
+export async function deleteProductFromCatalog(id: string): Promise<boolean> {
+  const raw = await readFile(fixtureUrl, "utf8");
+  const parsed: unknown = JSON.parse(raw);
+
+  if (!Array.isArray(parsed)) {
+    throw new Error("Product fixture is invalid");
+  }
+
+  const remaining = parsed.filter((entry) => {
+    if (!entry || typeof entry !== "object" || !("id" in entry)) {
+      return true;
+    }
+
+    return entry.id !== id;
+  });
+
+  if (remaining.length === parsed.length) {
+    return false;
+  }
+
+  await writeFile(fixtureUrl, `${JSON.stringify(remaining, null, 2)}\n`, "utf8");
+  return true;
 }
 
 export async function inspectExternalCatalog(): Promise<string> {

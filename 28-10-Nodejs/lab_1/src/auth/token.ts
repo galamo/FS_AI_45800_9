@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import type { UserRecord } from "../data/users.js";
-
-const TOKEN_TTL_SECONDS = 60 * 60 * 24
+import { readTokenTtlMinutes } from "./tokenConfig.js";
 
 const readSecret = (): string => {
   const secret = process.env.JWT_SECRET;
@@ -12,8 +11,14 @@ const readSecret = (): string => {
   return secret;
 };
 
-export const signLoginToken = (user: UserRecord): string =>
-  jwt.sign({ username: user.login.username, role: user.role,  timestamp: new Date().toISOString() }, readSecret(), { expiresIn: TOKEN_TTL_SECONDS });
+export const signLoginToken = async (user: UserRecord): Promise<string> => {
+  const ttlMinutes = await readTokenTtlMinutes();
+  return jwt.sign(
+    { username: user.login.username, role: user.role, timestamp: new Date().toISOString() },
+    readSecret(),
+    { expiresIn: ttlMinutes * 60 },
+  );
+};
 
 export const verifyLoginToken = (token: string): {status: boolean, user: UserRecord | null} => {
   try {

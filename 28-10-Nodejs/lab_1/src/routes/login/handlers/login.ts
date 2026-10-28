@@ -27,7 +27,7 @@ export const login: RequestHandler = async (req, res) => {
     return;
   }
  
-  const token = signLoginToken(user);
+  const token = await signLoginToken(user);
   res.status(200).json({
     message: "Login successful",
     user: {

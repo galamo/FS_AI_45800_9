@@ -7,6 +7,7 @@ import cors from "cors";
 import { inspectExternalCatalog, loadProductCatalog } from "./products/catalog.js";
 import { createJokesRouter } from "./routes/jokes/index.js";
 import { createProductsRouter } from "./routes/products/index.js";
+import settingsRouter from "./routes/settings/index.js";
 import { logger } from "./logger.js";
 config();
 
@@ -51,6 +52,7 @@ async function start() {
   console.log(observation);
   app.use("/api/products", createProductsRouter(products));
   app.use("/api/jokes", createJokesRouter());
+  app.use("/api/settings", settingsRouter);
   app.use(errorHandler);
 
   app.listen(port, () => {

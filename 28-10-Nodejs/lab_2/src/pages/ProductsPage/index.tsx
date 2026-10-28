@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Spinner from '../../components/Spinner'
 import ProductFilters from './ProductFilters'
 import ProductTable from './ProductTable'
-import { getProductFilters, getProducts, ProductsRequestError } from './products-api'
+import { deleteProduct, getProductFilters, getProducts, ProductsRequestError } from './products-api'
 import { emptyProductDraft, type Product, type ProductDraft, type ProductQuery } from './product-type'
 import '../page.css'
 import './products-page.css'
@@ -50,6 +50,9 @@ export default function ProductsPage() {
   const [total, setTotal] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [deleteError, setDeleteError] = useState('')
+  const [deleteMessage, setDeleteMessage] = useState('')
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const [hasLoaded, setHasLoaded] = useState(false)
 
   const loadProducts = async (nextDraft: ProductDraft) => {
@@ -71,37 +74,35 @@ export default function ProductsPage() {
     }
   }
 
-  useEffect(() => {
-    let cancelled = false
+  async function loadInitial(cancelled: boolean) {
+    try {
+      const [filterOptions, result] = await Promise.all([getProductFilters(), getProducts({})])
+      if (cancelled) {
+        return
+      }
 
-    async function loadInitial() {
-      try {
-        const [filterOptions, result] = await Promise.all([getProductFilters(), getProducts({})])
-        if (cancelled) {
-          return
-        }
+      setCategories(filterOptions.categories)
+      setBrands(filterOptions.brands)
+      setProducts(result.products)
+      setTotal(result.total)
+      setHasLoaded(true)
+    } catch (err) {
+      if (cancelled) {
+        return
+      }
 
-        setCategories(filterOptions.categories)
-        setBrands(filterOptions.brands)
-        setProducts(result.products)
-        setTotal(result.total)
-        setHasLoaded(true)
-      } catch (err) {
-        if (cancelled) {
-          return
-        }
-
-        const message = err instanceof ProductsRequestError ? err.message : 'The product request failed.'
-        setError(message)
-      } finally {
-        if (!cancelled) {
-          setIsLoading(false)
-        }
+      const message = err instanceof ProductsRequestError ? err.message : 'The product request failed.'
+      setError(message)
+    } finally {
+      if (!cancelled) {
+        setIsLoading(false)
       }
     }
+  }
 
-    void loadInitial()
-
+  useEffect(() => {
+    let cancelled = false
+    void loadInitial(cancelled)
     return () => {
       cancelled = true
     }
@@ -114,6 +115,25 @@ export default function ProductsPage() {
   const handleReset = () => {
     setDraft(emptyProductDraft)
     void loadProducts(emptyProductDraft)
+  }
+
+  const handleDelete = async (id: string) => {
+    setDeletingId(id)
+    setDeleteError('')
+    setDeleteMessage('')
+
+    try {
+      const result = await deleteProduct(id)
+      // setProducts((current) => current.filter((product) => product.id !== id))
+      // setTotal((current) => Math.max(0, current - 1))
+      await loadInitial(false)
+      setDeleteMessage(result.message)
+    } catch (err) {
+      const message = err instanceof ProductsRequestError ? err.message : 'The product request failed.'
+      setDeleteError(message)
+    } finally {
+      setDeletingId(null)
+    }
   }
 
   return (
@@ -147,7 +167,19 @@ export default function ProductsPage() {
       {!isLoading && !error && hasLoaded && total === 0 && (
         <p className="products-empty">No products match these filters.</p>
       )}
-      {!isLoading && !error && products.length > 0 && <ProductTable products={products} />}
+      {!isLoading && deleteMessage && (
+        <Alert severity="success" role="status">
+          {deleteMessage}
+        </Alert>
+      )}
+      {!isLoading && deleteError && (
+        <Alert severity="error" role="alert">
+          {deleteError}
+        </Alert>
+      )}
+      {!isLoading && !error && products.length > 0 && (
+        <ProductTable products={products} deletingId={deletingId} onDelete={(id) => void handleDelete(id)} />
+      )}
     </section>
   )
 }
