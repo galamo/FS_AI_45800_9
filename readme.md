@@ -748,5 +748,12 @@ owners: [{name:"gal", lastname:"am", role:"admin"},{name:"yocheved", lastname:"b
 5. Error handling 
 6. Routing between pages in react
 
+## Prepare to the task:
+1. use the following api - https://www.omdbapi.com/ sign into and generate api key
+2. implement a react client UI that search a movie by title 
+3. add an option to support filter by type
+4. support sorting
+5. support showing the infromation in cards
+6. support showing a plot -extended data when clicking on a movie - move to movie page 
 
 
